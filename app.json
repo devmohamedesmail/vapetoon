@@ -1,0 +1,40 @@
+{
+  "expo": {
+    "name": "VapeToon",
+    "slug": "vapetoon",
+    "version": "1.0.1",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "buildNumber": "1.0.1",
+      "bundleIdentifier": "com.dev.mohamed.esmail.vapetoon",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "package": "com.dev.mohamed.esmail.vapetoon",
+      "versionCode":1
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "4bb6b717-e3fc-4a3e-aa43-bacc8792b991"
+      }
+    }
+  }
+}
