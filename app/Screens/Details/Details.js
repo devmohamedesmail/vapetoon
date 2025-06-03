@@ -17,7 +17,7 @@ export default function Details() {
   const [selectedvariants, setSelectedVariants] = useState([]);
   const [selectedoptions, setSelectedoptions] = useState([]);
   const [product, setProduct] = useState(null);
-
+  const [selectedImage, setSelectedImage] = useState(null);
 
 
 
@@ -68,7 +68,7 @@ export default function Details() {
       {product ? (
         <>
           <ScrollDiv bg={Custom_colors.screen}>
-            <Swiper_Images product={product} />
+            <Swiper_Images product={product} selectedImage={selectedImage} />
 
 
             <Product_description
@@ -79,6 +79,7 @@ export default function Details() {
               setSelectedVariants={setSelectedVariants}
               selectedoptions={selectedoptions}
               setSelectedoptions={setSelectedoptions}
+             setSelectedImage={setSelectedImage}
             />
 
 

@@ -13,7 +13,8 @@ export default function Product_description({
   selectedvariants,
   setSelectedVariants,
   selectedoptions,
-  setSelectedoptions
+  setSelectedoptions,
+  setSelectedImage
 }) {
 
   const { t, i18n } = useTranslation();
@@ -24,9 +25,14 @@ export default function Product_description({
   const handleAttributeSelect = (attrName, value) => {
     setSelectedAttributes(prev => ({
       ...prev,
-      [attrName]: value,
+      [attrName]: value.value,
     }));
-    console.log(selectedAttributes)
+
+
+    if (value?.image?.formats?.thumbnail?.url) {
+      setSelectedImage(value.image.formats.thumbnail.url);
+    }
+    
   };
 
 
@@ -66,7 +72,7 @@ export default function Product_description({
 
 
 
- 
+
 
 
 
@@ -80,47 +86,32 @@ export default function Product_description({
 
 
 
-            <Div flexDir='row' flexWrap='wrap' justifyContent='space-between' alignItems='center'>
+            <Div flexDir='row' flexWrap='wrap' justifyContent='flex-start' alignItems='center'>
               {attr.values.map((value, idx) => (
                 <Button
                   bg={selectedAttributes[attr.name] === value.value ? Custom_colors.secondary : "gray200"}
                   shadow={selectedAttributes[attr.name] === value.value ? "sm" : "none"}
                   position='relative'
-                  w={'20%'}
+                  w={'15%'}
                   p={0}
                   key={idx}
                   py={10}
-                  onPress={() => handleAttributeSelect(attr.name, value.value)}>
+                  mr={10}
+                  rounded={30}
+                  onPress={() => handleAttributeSelect(attr.name, value)}>
                   <Div
                     w={"100%"}
-                    
+
                     alignItems="center"
                     justifyContent="center"
 
                   >
-                    {selectedAttributes[attr.name] === value.value ? (
-                      <Div
-                        position="absolute"
-                        top={-10}
-                        right={0}
-                        bg={Custom_colors.primary}
-                        w={20}
-                        h={20}
-                        rounded="circle"
-                        flexDir="column"
-                        justifyContent="center"
-                        alignItems="center"
-                      >
-                        <AntDesign name="checkcircle" size={20} color="white" />
-                      </Div>
-                    ) : (
-                      <></>
-                    )}
-                    
-                   
+
+
+
                     <Image
-                      w={70}
-                      h={70}
+                      w={40}
+                      h={40}
                       rounded={"circle"}
 
                       source={{
