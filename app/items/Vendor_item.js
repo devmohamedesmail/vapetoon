@@ -5,8 +5,7 @@ import { Button, Div, Image ,Text} from 'react-native-magnus'
 const Vendor_item = ({ item }) => {
     const navigation = useNavigation()
 
-  
-    console.log(item)
+
     return (
         <Button onPress={() => navigation.navigate('Vendor', { vendorId: item.id })} bg="white" p={0} mb={7} w="32%" rounded={10}>
 

@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { Div, Text, Image,Skeleton } from 'react-native-magnus'
+import { Div, Text, Image, Skeleton, ScrollDiv } from 'react-native-magnus'
 import Custom_colors from '../../config/Custom_colors'
 import Header from '../../Component/Header/Header'
 import Bottom_Navbar from '../../Component/Bottom_Navbar/Bottom_Navbar'
@@ -13,6 +13,7 @@ import { api_config } from '../../config/api_config'
 import AntDesign from '@expo/vector-icons/AntDesign';
 import Fontisto from '@expo/vector-icons/Fontisto';
 import Feather from '@expo/vector-icons/Feather';
+import { ScrollView } from 'react-native'
 export default function Account() {
     const { t, i18n } = useTranslation();
     const [activeTab, setActiveTab] = useState(0);
@@ -22,7 +23,7 @@ export default function Account() {
 
     // Dummy components for each tab
     const OrdersTab = () => (
-        <Div p={15}>
+        <Div p={15}  >
             <Text fontWeight="bold" mb={10}>{t('orders')}</Text>
             {orders ? (
                 <>
@@ -132,25 +133,66 @@ export default function Account() {
             <Header />
             <Drawer />
 
-            <Div flex={1} bg={Custom_colors.screen}>
-                {auth?.user.username && <Text>{t('welcome')} {auth?.user.username}</Text>}
-                <Div flexDir='row' justifyContent='space-between' alignItems='center' px={5} my={10}>
-                    <Account_item
-                        image={require('../../../assets/images/order.png')}
-                        title={t('orders')}
-                        onPress={() => setActiveTab(0)}
-                    />
-                    <Account_item
-                        image={require('../../../assets/images/gps.png')}
-                        title={t('addressess')}
-                        onPress={() => setActiveTab(1)}
-                    />
-                    <Account_item
-                        image={require('../../../assets/images/user.png')}
-                        title={t('info')}
-                        onPress={() => setActiveTab(2)}
-                    />
-                </Div>
+            <Div flex={1} flexDir='column' justifyContent='flex-start'  bg={Custom_colors.screen}>
+
+
+                <ScrollView 
+                    horizontal 
+                    showsHorizontalScrollIndicator={false} 
+                    contentContainerStyle={{ height: 40, alignItems: 'center' }}  px={5}>
+                    <Div row>
+                        <Account_item
+                            title={t('orders')}
+                            onPress={() => setActiveTab(0)}
+                        />
+                        <Account_item
+                            title={t('addressess')}
+                            onPress={() => setActiveTab(1)}
+                        />
+                        <Account_item
+                            title={t('info')}
+                            onPress={() => setActiveTab(2)}
+                        />
+                        <Account_item
+                            title={t('info')}
+                            onPress={() => setActiveTab(2)}
+                        />
+                        <Account_item
+                            title={t('info')}
+                            onPress={() => setActiveTab(2)}
+                        />
+                        <Account_item
+                            title={t('info')}
+                            onPress={() => setActiveTab(2)}
+                        />
+                        <Account_item
+                            title={t('info')}
+                            onPress={() => setActiveTab(2)}
+                        />
+                        <Account_item
+                            title={t('info')}
+                            onPress={() => setActiveTab(2)}
+                        />
+                        <Account_item
+                            title={t('info')}
+                            onPress={() => setActiveTab(2)}
+                        />
+                        <Account_item
+                            title={t('info')}
+                            onPress={() => setActiveTab(2)}
+                        />
+                        <Account_item
+                            title={t('info')}
+                            onPress={() => setActiveTab(2)}
+                        />
+                        <Account_item
+                            title={t('info')}
+                            onPress={() => setActiveTab(2)}
+                        />
+                       
+                    </Div>
+                </ScrollView>
+                
 
                 {activeTab === 0 && <OrdersTab />}
                 {activeTab === 1 && <AddressesTab />}

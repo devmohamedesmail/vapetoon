@@ -22,12 +22,13 @@ export default function Login() {
   const { auth, handle_login } = useContext(AuthContext)
   const [loading, setLoading] = useState(false)
   const snackbarRef = useRef(null);
+  const [error, setError] = useState(null)
 
 
   const formik = useFormik({
     initialValues: {
-      identifier: 'test@example.com',
-      password: '123456'
+      identifier: 'user@gmail.com',
+      password: '123456789'
     },
     validationSchema: Yup.object().shape({
       identifier: Yup.string().email('Invalid email').required('Email is required'),
@@ -38,8 +39,11 @@ export default function Login() {
       try {
         const result = await handle_login(values.identifier, values.password)
 
-        if (result !== null) {
 
+
+        if (result === undefined) {
+          setError(true)
+        } else {
           snackbarRef.current.show(
             t('login-successful'),
             {
@@ -53,14 +57,11 @@ export default function Login() {
             }
           );
 
+          console.log("Result", result)
           setTimeout(() => {
             navigation.navigate('Home')
           }, 2000)
-
-
-
         }
-
 
 
 
@@ -133,7 +134,7 @@ export default function Login() {
             error={formik.errors.password}
 
           />
-
+           {error && <Text textAlign='center' color='red'>{t('invalid-credentials')}</Text>}
           {loading ? <Custom_spinner /> : <Custom_button title={t('login')} onPress={formik.handleSubmit} />}
 
           <Text textAlign='center' fontWeight='bold'> Or </Text>

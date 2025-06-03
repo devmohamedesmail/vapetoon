@@ -1,12 +1,10 @@
 import { Button, Div, Image ,Text} from 'react-native-magnus'
+import Custom_colors from '../config/Custom_colors'
 
 export default function Account_item({image,onPress,title}) {
   return (
-    <Button onPress={onPress} flex={1} mx={5} bg="white">
-        <Div flexDir='column' justifyContent='center' alignItems='center'>
-            <Image w={40} h={40} source={image}  />
-            <Text mt={10}>{title}</Text>
-        </Div>
+    <Button onPress={onPress} py={4} fontSize={12} mx={5} bg={Custom_colors.primary} color='white'>       
+       {title}
     </Button>
   )
 }

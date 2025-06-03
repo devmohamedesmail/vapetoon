@@ -28,6 +28,7 @@
     "react-native": "0.79.2",
     "react-native-app-intro-slider": "^4.0.4",
     "react-native-magnus": "^1.0.63",
+    "react-native-modal": "^14.0.0-rc.1",
     "react-native-render-html": "^6.3.4",
     "react-native-safe-area-context": "5.4.0",
     "react-native-screens": "~4.10.0",

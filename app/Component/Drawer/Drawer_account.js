@@ -39,7 +39,8 @@ export default function Drawer_account() {
         </Div>
       </Drawer>
 
-      <Div flexDir='row' justifyContent='flex-end' px={10} my={10}>
+      <Div flexDir='row' justifyContent='space-between' alignItems='center' bg="white" px={10} my={10}>
+        {auth?.user.username && <Text>{auth?.user.username}</Text>}
         <Button
          
           bg="white"

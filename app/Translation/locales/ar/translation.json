@@ -123,7 +123,14 @@
    "order-details":" تفاصيل الطلب ",
    "order_number":" رقم الطلب ",
    "payment-method":" طريقة الدفع ",
-   "pay-with-visa":" الدفع ببطاقة فيزا"
+   "pay-with-visa":" الدفع ببطاقة فيزا",
+   "add-review":" اضف تعليق",
+   "reviews":" التعليقات ",
+   "no-reviews":" لا يوجد تعليقات",
+   "no-orders":" لا يوجد طلبات",
+   "no-addresses":" لا يوجد عناوين",
+   "write-review": " اكتب تعليقك",
+   "invalid-credentials":" الرقم السري او البريد الالكتروني غير صحيح"
   
 
 

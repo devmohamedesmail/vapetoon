@@ -11,10 +11,8 @@ import Product_card_item from '../../items/Product_card_item'
 import Products_skeleton from '../../skeletons/Products_skeleton'
 export default function Shop({ route }) {
   const category = route?.params?.category;
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState(null);
   const [loading, setLoading] = useState(true);
-
-
 
 
 
@@ -32,19 +30,24 @@ export default function Shop({ route }) {
 
   const fetch_products = async () => {
     try {
-      let url = `${api_config.url}/api/products?populate[image]=true&populate[gallery]=true`;
-
-      if (category?.id) {
-        url += `&filters[category][id][$eq]=${category.id}`;
+      if(category?.id){
+        const response = await axios.get(`${api_config.url}/api/products?filters[category][id][$eq]=28&populate=images`, {
+          headers: {
+            Authorization: `Bearer ${api_config.token}`,
+          },
+        });
+        setProducts(response.data.data);
+        
+      }else{
+        const response = await axios.get(`${api_config.url}/api/products?populate=images`, {
+          headers: {
+            Authorization: `Bearer ${api_config.token}`,
+          },
+        });
+        setProducts(response.data.data);
       }
 
-      const response = await axios.get(url, {
-        headers: {
-          Authorization: `Bearer ${api_config.token}`,
-        },
-      });
-
-      setProducts(response.data.data);
+      
     } catch (error) {
       console.log(error);
     } finally {
@@ -58,18 +61,24 @@ export default function Shop({ route }) {
 
 
 
+
+
+
+
+
+
+
   return (
-    <Div flex={1}>
+       <Div flex={1}>
       <Div pt={15} bg="white">
         <Header bg="transparent" />
       </Div>
       <ScrollDiv bg={Custom_colors.screen}>
-
         {/* header Category Section start */}
         {category?.image?.url && (
           <Div position="relative">
             <Image
-              source={{ uri: `https://ecommerce-strapi-ex18.onrender.com${category.image.url}` }}
+              source={{ uri: `${category.image.formats.thumbnail.url}` }}
               w="100%"
               h={200}
             />
@@ -80,13 +89,10 @@ export default function Shop({ route }) {
         )}
         {/* header Category Section end */}
 
-
-
-
-        <Div my={5} px={5} >
-
-
-          {products && products.length > 0 ? (
+        <Div my={5} px={5}>
+          {loading ? (
+            <Products_skeleton />
+          ) : products && products.length > 0 ? (
             <Div
               flexDir="row"
               justifyContent="space-between"
@@ -98,21 +104,11 @@ export default function Shop({ route }) {
               ))}
             </Div>
           ) : (
-            <Products_skeleton />
+            <Div alignItems="center" py={20}>
+              <Text color="gray500">No products found.</Text>
+            </Div>
           )}
         </Div>
-
-
-
-
-
-
-
-
-
-
-
-
       </ScrollDiv>
       <Bottom_Navbar />
     </Div>

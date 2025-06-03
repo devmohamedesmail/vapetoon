@@ -8,6 +8,7 @@ import Product_action from "./parts/Product_action";
 import Header from "../../Component/Header/Header";
 import axios from "axios";
 import { api_config } from "../../config/api_config";
+import Product_review from "./parts/Product_review";
 
 export default function Details() {
   const route = useRoute();
@@ -25,23 +26,7 @@ export default function Details() {
 
 
 
-  // const fetch_product_details = async () => {
-  //   try {
-  //     const response = await axios.get(`${api_config.url}/api/products?filters[id][$eq]=${productId}&populate[category]=true&populate[vendor]=true&populate[images]=true&populate[attributes][populate]=values`,
-  //       {
-  //         headers: {
-  //           Authorization: `Bearer ${api_config.token}`,
 
-  //         }
-  //       }
-  //     )
-
-  //     setProduct(response.data.data[0])
-
-  //   } catch (error) {
-  //     console.log("error fetcing product details", error)
-  //   }
-  // }
   const fetch_product_details = async () => {
     try {
       const response = await axios.get(`https://ecommerce-strapi-ex18.onrender.com/api/products?filters[id][$eq]=${productId}&populate[category]=true&populate[vendor]=true&populate[images]=true&populate[attributes][populate][values][populate]=image`,
@@ -95,6 +80,16 @@ export default function Details() {
               selectedoptions={selectedoptions}
               setSelectedoptions={setSelectedoptions}
             />
+
+
+          <Product_review    
+             product={product}
+          
+          />
+
+
+
+
           </ScrollDiv>
           <Product_action
             product={product}
