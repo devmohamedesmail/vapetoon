@@ -1,6 +1,6 @@
 const Custom_colors = {
   'primary': '#000',
-  'secondary': '#fca311',
+  'secondary': '#ff6b35',
   'light': '#e5e5e5',
   'black': '#000000',
   'white': '#ffffff',

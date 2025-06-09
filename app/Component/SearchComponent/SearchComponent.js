@@ -36,7 +36,7 @@ export default function SearchComponent() {
             rounded={29}
             placeholder={t('search')}
             p={10}
-            focusBorderColor={Custom_colors.primary}
+            focusBorderColor={Custom_colors.secondary}
             suffix={<Icon name="search" color="gray900" fontFamily="Feather" />}
             value={searchText}
             onChangeText={setSearchText}

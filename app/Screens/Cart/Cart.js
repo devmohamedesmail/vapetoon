@@ -12,10 +12,10 @@ import { api_config } from "../../config/api_config";
 import { AuthContext } from "../../Context/AuthProvider";
 export default function Cart() {
   const cartItems = useSelector((state) => state.cart.products);
-  const { t , i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
   const navigation = useNavigation();
   const [totalAmount, setTotalAmount] = useState(0);
-  const {auth}=useContext(AuthContext)
+  const { auth } = useContext(AuthContext)
 
 
 
@@ -71,7 +71,7 @@ export default function Cart() {
                 <Custom_button
                   title={t("checkout")}
                   onPress={() => {
-                     navigation.navigate("Checkout")
+                    navigation.navigate("Checkout")
                   }}
                 />
               </>

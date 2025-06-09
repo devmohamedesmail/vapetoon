@@ -64,7 +64,7 @@ export default function Product_description({
 
         <Div flexDir='row' justifyContent='space-between' alignItems='center'>
           <Text fontWeight='bold' mt={10} >{product?.vendor?.vendor_name}</Text>
-          <Button rounded={30} px={15} py={5} fontSize={12} bg={Custom_colors.primary} onPress={() => navigation.navigate("Vendor", { vendorId: product.vendor.id })}>
+          <Button rounded={10} px={15} py={10} fontSize={12} bg={Custom_colors.primary} onPress={() => navigation.navigate("Vendor", { vendorId: product.vendor.id })}>
             {t('visit-vendor')}
           </Button>
         </Div>
@@ -97,6 +97,7 @@ export default function Product_description({
                   key={idx}
                   py={10}
                   mr={10}
+                  mb={10}
                   rounded={30}
                   onPress={() => handleAttributeSelect(attr.name, value)}>
                   <Div
@@ -109,7 +110,9 @@ export default function Product_description({
 
 
 
-                    <Image
+{value?.image ?
+
+ <Image
                       w={40}
                       h={40}
                       rounded={"circle"}
@@ -117,7 +120,10 @@ export default function Product_description({
                       source={{
                         uri: value?.image?.formats?.thumbnail?.url,
                       }}
-                    />
+                    />:(<></>)}
+
+
+                   
                     <Text
                       color={selectedAttributes[attr.name] === value.value ? "white" : "gray800"}
                       fontWeight={selectedAttributes[attr.name] === value.value ? "bold" : "normal"}
@@ -167,9 +173,13 @@ export default function Product_description({
 
         <Div
           flexDir="row"
-          justifyContent="flex-end"
+          bg="gray200"
+          justifyContent="center"
           alignItems="center"
-          w={200}
+          px={10}
+          py={5}
+          rounded={10}
+          w={130}
 
         >
           <Custom_quantity_btn

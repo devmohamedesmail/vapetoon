@@ -6,6 +6,7 @@ import { Div, Text, Skeleton, Button, Icon, Input ,Modal} from 'react-native-mag
 import { api_config } from '../../../config/api_config';
 import { useFormik } from 'formik';
 import Custom_button from '../../../Custom_Components/Custom_button';
+import Custom_spinner from '../../../Custom_Components/Custom_spinner';
 
 
 
@@ -220,7 +221,8 @@ export default function Product_review({ product }) {
                         />
                     </Div>
 
-                    <Custom_button title={t('Submit')} onPress={formik.handleSubmit} disabled={formik.values.rating === 0 || !formik.values.comment} />
+
+                    {loading ? <Custom_spinner /> :                     <Custom_button title={t('Submit')} onPress={formik.handleSubmit} disabled={formik.values.rating === 0 || !formik.values.comment} /> }
                 </Div>
             </Modal>
 

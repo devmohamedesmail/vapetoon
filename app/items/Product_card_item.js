@@ -47,7 +47,9 @@ function Product_card_item({ product }) {
     const handle_add_to_cart = (product) => {
 
         try {
-            dispatch(add_to_cart(product))
+            const { id,title, price,sale, images } = product;
+            const quantity = 1
+            dispatch(add_to_cart({ id,title, price, images,sale, quantity }))
             Toast.show({
                 type: "success",
                 position: "bottom",
@@ -86,14 +88,9 @@ function Product_card_item({ product }) {
                     <Swiper
                         style={{ height: 200 }}
                         showsButtons={true}
-                        activeDotColor="#ff6b35"
-                        nextButton={
-                            <Entypo name="chevron-right" size={20} color="black" />
-
-                        }
-                        prevButton={
-                            <Entypo name="chevron-left" size={20} color="black" />
-                        }
+                        activeDotColor={Custom_colors.secondary}
+                        nextButton={<Entypo name="chevron-with-circle-right" size={20} color={Custom_colors.secondary} />}
+                        prevButton={<Entypo name="chevron-with-circle-left" size={20} color={Custom_colors.secondary} />}
 
                     >
                         {product.images && product.images.map((image, index) => (

@@ -5,7 +5,7 @@ import Custom_colors from "../../../config/Custom_colors";
 import { useNavigation } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import { add_to_cart, add_To_cart } from "../../../Redux/Reducers/cartReducer";
+import { add_to_cart } from "../../../Redux/Reducers/cartReducer";
 import Toast from "react-native-toast-message";
 import AntDesign from '@expo/vector-icons/AntDesign';
 import Entypo from '@expo/vector-icons/Entypo';
@@ -46,19 +46,35 @@ export default function Product_action({
   };
 
 
-  const handle_add_to_cart = () => {
-    dispatch(add_to_cart({
-      product: product,
-      quantity: quantity,
-      selectedvariants: selectedvariants,
-      selectedoptions: selectedoptions
+const handle_add_to_cart = (product) => {
+
+        try {
+            const { id,title, price,sale, images } = product;
+            const quantity = 1
+            dispatch(add_to_cart({ id,title, price, images,sale, quantity }))
+            Toast.show({
+                type: "success",
+                position: "bottom",
+                text1: t('added_to_cart'),
+                visibilityTime: 3000,
+            });
+        } catch (error) {
+            Toast.show({
+                type: "error",
+                position: "bottom",
+                text1: t('error-happened'),
+                visibilityTime: 3000,
+            });
+
+        }
+    }
 
 
-    }))
 
-  }
   return (
     <Div h={100} flexDir="row" alignItems="center" px={5} bg="white" pt={5} pb={30}>
+    
+    
       <Button
         h={45}
         flex={1}

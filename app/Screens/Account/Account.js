@@ -133,13 +133,13 @@ export default function Account() {
             <Header />
             <Drawer />
 
-            <Div flex={1} flexDir='column' justifyContent='flex-start'  bg={Custom_colors.screen}>
+            <Div flex={1} flexDir='column' justifyContent='flex-start' bg={Custom_colors.screen}>
 
 
-                <ScrollView 
-                    horizontal 
-                    showsHorizontalScrollIndicator={false} 
-                    contentContainerStyle={{ height: 40, alignItems: 'center' }}  px={5}>
+                <ScrollView
+                    horizontal
+                    showsHorizontalScrollIndicator={false}
+                    contentContainerStyle={{ height: 100, alignItems: 'center' }} px={5}>
                     <Div row>
                         <Account_item
                             title={t('orders')}
@@ -189,14 +189,19 @@ export default function Account() {
                             title={t('info')}
                             onPress={() => setActiveTab(2)}
                         />
-                       
+
                     </Div>
                 </ScrollView>
-                
 
-                {activeTab === 0 && <OrdersTab />}
-                {activeTab === 1 && <AddressesTab />}
-                {activeTab === 2 && <InfoTab />}
+
+
+
+                <ScrollDiv>
+                    {activeTab === 0 && <OrdersTab />}
+                    {activeTab === 1 && <AddressesTab />}
+                    {activeTab === 2 && <InfoTab />}
+                </ScrollDiv>
+
 
 
 

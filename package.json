@@ -26,6 +26,7 @@
     "react": "19.0.0",
     "react-i18next": "^15.4.0",
     "react-native": "0.79.2",
+    "react-native-animatable": "^1.4.0",
     "react-native-app-intro-slider": "^4.0.4",
     "react-native-magnus": "^1.0.63",
     "react-native-modal": "^14.0.0-rc.1",
