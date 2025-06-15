@@ -3,10 +3,10 @@ import { Button, Div, Image, Text } from 'react-native-magnus'
 
 export default function Category_item({name , image, onPress}) {
   return (
-    <Button bg='transparent' w='15%' mb={10} mx={5} p={0} flexDir='column' justifyContent='center' alignItems='center' onPress={onPress}>
+    <Button bg='transparent' w='23%' mb={10} mx={2} p={0} flexDir='column' justifyContent='center' alignItems='center' onPress={onPress}>
       <Image
-        h={80}
-        w={60}
+        h={90}
+        w={90}
         rounded='circle'
         source={{
           uri:`${image}`,
@@ -16,3 +16,5 @@ export default function Category_item({name , image, onPress}) {
     </Button>
   )
 }
+
+

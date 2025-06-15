@@ -47,9 +47,9 @@ function Product_card_item({ product }) {
     const handle_add_to_cart = (product) => {
 
         try {
-            const { id,title, price,sale, images } = product;
+            const { id, title, price, sale, images } = product;
             const quantity = 1
-            dispatch(add_to_cart({ id,title, price, images,sale, quantity }))
+            dispatch(add_to_cart({ id, title, price, images, sale, quantity }))
             Toast.show({
                 type: "success",
                 position: "bottom",
@@ -73,113 +73,162 @@ function Product_card_item({ product }) {
 
 
     return (
+      
         <Div
             w="49%"
-            mb={4}
+            mb={12}
             bg="white"
-            rounded="md"
-            position="relative"
+            rounded={18}
             borderColor="gray200"
             borderWidth={1}
+            overflow="hidden"
+            position="relative"
         >
-            <Button p={0} onPress={() => navigation.navigate("Details", { productId: product.id })} bg="transparent">
-                <Div position="relative" w="100%" h="100%">
-
+            <Button
+                p={0}
+                onPress={() => navigation.navigate("Details", { productId: product.id })}
+                bg="transparent"
+                activeOpacity={0.85}
+            >
+                <Div position="relative" w="100%">
                     <Swiper
-                        style={{ height: 200 }}
+                        style={{ height: 200, borderTopLeftRadius: 18, borderTopRightRadius: 18 }}
                         showsButtons={true}
                         activeDotColor={Custom_colors.secondary}
-                        nextButton={<Entypo name="chevron-with-circle-right" size={20} color={Custom_colors.secondary} />}
-                        prevButton={<Entypo name="chevron-with-circle-left" size={20} color={Custom_colors.secondary} />}
-
+                        nextButton={
+                            <Entypo name="chevron-with-circle-right" size={22} color={Custom_colors.secondary} />
+                        }
+                        prevButton={
+                            <Entypo name="chevron-with-circle-left" size={22} color={Custom_colors.secondary} />
+                        }
                     >
-                        {product.images && product.images.map((image, index) => (
-                            <Div h={200} key={index}>
-                                <Image
-                                    h={200}
-                                    w="100%"
-                                    rounded="md"
-                                    source={{
-                                        uri: `${image?.formats?.thumbnail?.url}`,
-                                    }}
-                                />
-                            </Div>
-                        ))}
-
-
+                        {product.images &&
+                            product.images.map((image, index) => (
+                                <Div h={200} key={index}>
+                                    <Image
+                                        h={200}
+                                        w="100%"
+                                        roundedTop="xl"
+                                        source={{
+                                            uri: `${image?.formats?.thumbnail?.url}`,
+                                        }}
+                                        style={{
+                                            borderTopLeftRadius: 18,
+                                            borderTopRightRadius: 18,
+                                        }}
+                                    />
+                                </Div>
+                            ))}
                     </Swiper>
+                    {/* Sale Badge */}
                     {product.sale && product.price && product.price > product.sale ? (
-                        <Text
+                        <Div
+                            position="absolute"
+                            top={12}
+                            left={12}
                             bg="#ff6b35"
-                            color="white"
-                            textAlign="center"
-                            py={1}
-                            px={4}
+                            px={10}
+                            py={4}
+                            rounded="circle"
+                            shadow="md"
                         >
-                            {`Save ${product.price - product.sale} ${i18n.language === "ar" ? api_config.currency_ar : api_config.currency_en}`}
-                        </Text>
+                            <Text color="white" fontWeight="bold" fontSize={12}>
+                                {`Save ${product.price - product.sale} ${i18n.language === "ar" ? api_config.currency_ar : api_config.currency_en
+                                    }`}
+                            </Text>
+                        </Div>
                     ) : (
-                        <Text
+                        <Div
+                            position="absolute"
+                            top={12}
+                            left={12}
                             bg="#ff6b35"
-                            color="white"
-                            textAlign="center"
-                            py={1}
-                            px={4}
+                            px={10}
+                            py={4}
+                            rounded="circle"
+                            shadow="md"
                         >
-                            {t('buy_now_and_enjoy')}
-                        </Text>
+                            <Text color="white" fontWeight="bold" fontSize={12}>
+                                {t("buy_now_and_enjoy")}
+                            </Text>
+                        </Div>
                     )}
+                    {/* Wishlist Button */}
+                    <Button
+                        bg="white"
+                        shadow="md"
+                        right={12}
+                        top={12}
+                        position="absolute"
+                        p={0}
+                        h={36}
+                        w={36}
+                        rounded="circle"
+                        onPress={() => handleAddtowishlist(product)}
+                        zIndex={2}
+                    >
+                        <AntDesign name="hearto" size={18} color="black" />
+                    </Button>
                 </Div>
             </Button>
 
-            <Button
-                bg="white"
-                shadow="md"
-                right={10}
-                top={10}
-                position="absolute"
-                p={0}
-                h={30}
-                w={30}
-                rounded="circle"
-                ml="md"
-                onPress={() => handleAddtowishlist(product)}
-            >
-                <AntDesign name="hearto" size={17} color="black" />
-            </Button>
-
-            <Div p={10}>
-                <Text fontWeight="semibold">{product.title}</Text>
-
-                <Div flexDir="row" justifyContent="space-between" alignItems="center" my={10}>
+            <Div p={14}>
+                <Text  fontSize={13} mb={4} numberOfLines={2}>
+                    {product.title}
+                </Text>
+                <Div flexDir="row" justifyContent="space-between" alignItems="center" my={8}>
                     <Div>
                         {product.sale ? (
-                            <Div flexDir='row'>
-                                <Text>{product.sale} {i18n.language === "ar" ? api_config.currency_ar : api_config.currency_en} </Text>
-                                <Text textDecorLine='line-through' color='red600'>{product.price} {i18n.language === "ar" ? api_config.currency_ar : api_config.currency_en} </Text>
+                            <Div flexDir="row" alignItems="center">
+                                <Text fontWeight="bold" color="green700">
+                                    {product.sale} {i18n.language === "ar" ? api_config.currency_ar : api_config.currency_en}
+                                </Text>
+                                <Text
+                                    textDecorLine="line-through"
+                                    color="red600"
+                                    ml={8}
+                                    fontSize={13}
+                                >
+                                    {product.price} {i18n.language === "ar" ? api_config.currency_ar : api_config.currency_en}
+                                </Text>
                             </Div>
-
                         ) : (
-                            <Text>{product.price} {i18n.language === "ar" ? api_config.currency_ar : api_config.currency_en} </Text>
+                            <Text fontWeight="bold">
+                                {product.price} {i18n.language === "ar" ? api_config.currency_ar : api_config.currency_en}
+                            </Text>
                         )}
                     </Div>
-
-                    <Text color="green700">Stock : {product.stock}</Text>
+                    {/* Stock Badge */}
+                    <Div
+                        bg={product.stock > 0 ? "green600" : "red600"}
+                        px={7}
+                        py={4}
+                        rounded="circle"
+                        shadow="xs"
+                    >
+                        <Text color="white"  fontSize={11}>
+                            {product.stock > 0 ? t("in_stock") : t("out_of_stock")}
+                        </Text>
+                    </Div>
                 </Div>
-
-
-
-                <Div flexDir="row" justifyContent="flex-end">
+                <Div flexDir="row" justifyContent="flex-end" mt={6}>
                     <Button
                         onPress={() => handle_add_to_cart(product)}
-                        bg={Custom_colors.black} h={35} p={0} w={35} rounded="md" shadow="md">
-                        <Div>
-                            <MaterialIcons name="add-shopping-cart" size={20} color="white" />
-                        </Div>
+                        bg={Custom_colors.black}
+                        h={38}
+                        w={38}
+                        rounded="circle"
+                        shadow="md"
+                        p={0}
+                        disabled={product.stock === 0}
+                        opacity={product.stock === 0 ? 0.5 : 1}
+                    >
+                        <MaterialIcons name="add-shopping-cart" size={20} color="white" />
                     </Button>
                 </Div>
             </Div>
         </Div>
+        // ...existing code...
     )
 }
 

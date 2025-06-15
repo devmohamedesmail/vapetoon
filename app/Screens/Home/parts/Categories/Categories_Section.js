@@ -6,6 +6,7 @@ import Category_skeleton from './Category_skeleton'
 import { useNavigation } from '@react-navigation/native'
 import { useTranslation } from 'react-i18next'
 import { api_config } from '../../../../config/api_config'
+import { CustomSectionTitle } from '../../../../Custom_Components/CustomSectionTitle'
 
 
 export default function Categories_Section() {
@@ -17,6 +18,7 @@ export default function Categories_Section() {
 
   return (
     <Div my={5} bg="white" py={10}>
+      <CustomSectionTitle title={t('shop-Categories')} subtitle={t('shop-Categories')} />
       {categories && categories.length > 0 ? (
         <Div flexDir='row' justifyContent='space-between' alignItems='center' flexWrap='wrap'>
           {categories.map((category, index) => (

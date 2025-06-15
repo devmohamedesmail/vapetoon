@@ -130,5 +130,8 @@
     "no-orders": " No Orders Found",
     "no-addresses": " No Addresses Found",
     "write-review": "Write Your Review",
-    "invalid-credentials":" Check Your Email Or Password"
+    "invalid-credentials":" Check Your Email Or Password",
+    "in_stock": "In Stock",
+    "out_of_stock": "Out Of Stock",
+    "shop-products":"Shop Products"
 }

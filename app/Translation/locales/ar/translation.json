@@ -130,7 +130,10 @@
    "no-orders":" لا يوجد طلبات",
    "no-addresses":" لا يوجد عناوين",
    "write-review": " اكتب تعليقك",
-   "invalid-credentials":" الرقم السري او البريد الالكتروني غير صحيح"
+   "invalid-credentials":" الرقم السري او البريد الالكتروني غير صحيح",
+     "in_stock": " متوفر ",
+    "out_of_stock": " غير متوفر ",
+    "shop-products":" متجر المنتجات"
   
 
 

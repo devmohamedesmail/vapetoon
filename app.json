@@ -2,7 +2,7 @@
   "expo": {
     "name": "VapeToon",
     "slug": "vapetoon",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -14,7 +14,7 @@
     },
     "ios": {
       "supportsTablet": true,
-      "buildNumber": "1.0.2",
+      "buildNumber": "1.0.3",
       "bundleIdentifier": "com.dev.mohamed.esmail.vapetoon",
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false
@@ -26,7 +26,7 @@
         "backgroundColor": "#ffffff"
       },
       "package": "com.dev.mohamed.esmail.vapetoon",
-      "versionCode":2
+      "versionCode":3
     },
     "web": {
       "favicon": "./assets/favicon.png"
