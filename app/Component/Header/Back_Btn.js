@@ -1,17 +1,38 @@
 import React from 'react'
+import { Pressable } from 'react-native'
 import { Div, Button, Text } from 'react-native-magnus'
-import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { useTranslation } from 'react-i18next';
-export default function Back_Btn() {
+
+export default function Back_Btn({ color = "#1f2937", showText = false, size = 44 }) {
     const navigation = useNavigation();
-    const {t} = useTranslation();
+    const { t } = useTranslation();
+    
     return (
-        <Button p={0} bg='transparent' onPress={()=>navigation.goBack()} mr={10}>
-            <Div flexDir='row' alignItems='center'>
-                <MaterialIcons name="arrow-back-ios" size={16} color="black" />
-                <Text color='black' fontSize={10}>{t('back')}</Text>
-            </Div>   
-        </Button>
+        <Pressable
+            onPress={() => navigation.goBack()}
+            style={({ pressed }) => ({
+                opacity: pressed ? 0.7 : 1,
+                transform: [{ scale: pressed ? 0.95 : 1 }],
+            })}
+        >
+            <Div
+                w={size}
+                h={size}
+                rounded="circle"
+                bg="rgba(31, 41, 55, 0.1)"
+                alignItems="center"
+                justifyContent="center"
+                flexDir="row"
+            >
+                <Ionicons name="arrow-back" size={22} color={color} />
+                {showText && (
+                    <Text color={color} fontSize={14} fontWeight="500" ml={4}>
+                        {t('back') || 'Back'}
+                    </Text>
+                )}
+            </Div>
+        </Pressable>
     )
 }

@@ -38,39 +38,53 @@ export default function Wishlist() {
     }
   };
   return (
-    <Div flex={1} bg={Custom_colors.screen}>
-      <Div pt={15} bg="white">
+    <Div flex={1} bg="#f8f9fa">
+      <Div pt={15} bg="white" borderBottomWidth={1} borderBottomColor="#f0f0f0">
         <Header bg="transparent" />
       </Div>
 
-
-
-
-      <ScrollDiv >
+      <ScrollDiv flex={1} showsVerticalScrollIndicator={false}>
         <Div px={20} py={20}>
-          <Text mb={30} textAlign="center" fontWeight="bold" bg="gray100" p={20}>{t('wishlist')}</Text>
+          <Text mb={30} textAlign="center" fontSize={24} fontWeight="700" color="#1f2937">
+            {t('wishlist') || 'My Wishlist'}
+          </Text>
           {wishlist && wishlist.length > 0 ? (
             <Div>
               {wishlist.map((product, index) => (
                 <WishlistItem
-                  key={index}
-                  name={product.title}
-                  price={product.price}
+                  key={product.id || index}
+                  item={{
+                    ...product,
+                    name: product.title || product.name,
+                    image: product.image
+                      ? `${api_config.url}${product.image.formats?.thumbnail?.url || product.image.url}`
+                      : product.images?.[0] || "https://via.placeholder.com/150",
+                  }}
                   showDetails={() => navigation.navigate("Details", { product })}
-                  image={
-                    product.image
-                      ? `${api_config.url}${product.image.formats.thumbnail.url}`
-                      : "https://via.placeholder.com/150"
-                  }
-                  onPress={() => handle_remove_from_wishlist(product.id)}
-                // showDetails={() => navigation.navigate("Details", { item })}
+                  onRemove={() => handle_remove_from_wishlist(product.id)}
                 />
               ))}
             </Div>
           ) : (
-            <Text bg="gray200" p={20} textAlign="center" fontWeight="bold">
-              {t("empty-wishlist")}
-            </Text>
+            <Div alignItems="center" py={60}>
+              <Div 
+                w={100} 
+                h={100} 
+                rounded="circle" 
+                bg="rgba(239, 68, 68, 0.1)" 
+                alignItems="center" 
+                justifyContent="center"
+                mb={20}
+              >
+                <Text fontSize={40}>💝</Text>
+              </Div>
+              <Text fontSize={20} fontWeight="700" color="#1f2937" mb={8} textAlign="center">
+                {t("empty_wishlist") || "Your wishlist is empty"}
+              </Text>
+              <Text fontSize={14} color="#6b7280" textAlign="center" lineHeight={20}>
+                {t("add_items_to_wishlist") || "Add items you love to your wishlist and they'll appear here"}
+              </Text>
+            </Div>
           )}
         </Div>
       </ScrollDiv>

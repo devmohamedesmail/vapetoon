@@ -1,6 +1,9 @@
-import React from 'react'
+import React, { useRef } from 'react'
+import { Animated, Pressable } from 'react-native'
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import AntDesign from '@expo/vector-icons/AntDesign';
+import Feather from '@expo/vector-icons/Feather';
+import Ionicons from '@expo/vector-icons/Ionicons';
 import { Div, Image, Button, Text } from 'react-native-magnus';
 import Custom_colors from '../config/Custom_colors';
 import { api_config } from '../config/api_config';
@@ -20,6 +23,22 @@ function Product_card_item({ product }) {
     const { t, i18n } = useTranslation();
     const dispatch = useDispatch();
     const navigation = useNavigation();
+    const scaleAnim = useRef(new Animated.Value(1)).current;
+
+    const animatePress = () => {
+        Animated.sequence([
+            Animated.timing(scaleAnim, {
+                toValue: 0.95,
+                duration: 100,
+                useNativeDriver: true,
+            }),
+            Animated.timing(scaleAnim, {
+                toValue: 1,
+                duration: 100,
+                useNativeDriver: true,
+            }),
+        ]).start();
+    };
 
 
     const handleAddtowishlist = (product) => {
@@ -73,162 +92,237 @@ function Product_card_item({ product }) {
 
 
     return (
-      
-        <Div
-            w="49%"
-            mb={12}
-            bg="white"
-            rounded={18}
-            borderColor="gray200"
-            borderWidth={1}
-            overflow="hidden"
-            position="relative"
+        <Animated.View
+            style={{
+                transform: [{ scale: scaleAnim }],
+                width: '48%',
+                marginBottom: 16,
+            }}
         >
-            <Button
-                p={0}
-                onPress={() => navigation.navigate("Details", { productId: product.id })}
-                bg="transparent"
-                activeOpacity={0.85}
+            <Pressable
+                onPress={() => {
+                    animatePress();
+                    navigation.navigate("Details", { productId: product.id });
+                }}
+                style={{
+                    backgroundColor: '#fff',
+                    borderRadius: 20,
+                    shadowColor: '#000',
+                    shadowOffset: { width: 0, height: 8 },
+                    shadowOpacity: 0.12,
+                    shadowRadius: 16,
+                    elevation: 8,
+                    overflow: 'hidden',
+                    borderWidth: 1,
+                    borderColor: '#f0f0f0',
+                }}
             >
-                <Div position="relative" w="100%">
+                {/* Image Section with Gradient Overlay */}
+                <Div position="relative" w="100%" h={200}>
                     <Swiper
-                        style={{ height: 200, borderTopLeftRadius: 18, borderTopRightRadius: 18 }}
-                        showsButtons={true}
+                        style={{ height: 200 }}
+                        showsButtons={false}
                         activeDotColor={Custom_colors.secondary}
-                        nextButton={
-                            <Entypo name="chevron-with-circle-right" size={22} color={Custom_colors.secondary} />
-                        }
-                        prevButton={
-                            <Entypo name="chevron-with-circle-left" size={22} color={Custom_colors.secondary} />
-                        }
+                        dotColor="rgba(255,255,255,0.5)"
+                        dotStyle={{ 
+                            width: 6, 
+                            height: 6, 
+                            borderRadius: 3,
+                            marginLeft: 3,
+                            marginRight: 3,
+                        }}
+                        activeDotStyle={{
+                            width: 20,
+                            height: 6,
+                            borderRadius: 3,
+                            marginLeft: 3,
+                            marginRight: 3,
+                        }}
+                        paginationStyle={{ bottom: 10 }}
                     >
                         {product.images &&
                             product.images.map((image, index) => (
-                                <Div h={200} key={index}>
+                                <Div h={200} key={index} position="relative">
                                     <Image
                                         h={200}
                                         w="100%"
-                                        roundedTop="xl"
                                         source={{
                                             uri: `${image?.formats?.thumbnail?.url}`,
                                         }}
                                         style={{
-                                            borderTopLeftRadius: 18,
-                                            borderTopRightRadius: 18,
+                                            borderTopLeftRadius: 20,
+                                            borderTopRightRadius: 20,
                                         }}
+                                    />
+                                    {/* Subtle gradient overlay */}
+                                    <Div
+                                        position="absolute"
+                                        bottom={0}
+                                        left={0}
+                                        right={0}
+                                        h={60}
+                                        bg="rgba(0,0,0,0.1)"
                                     />
                                 </Div>
                             ))}
                     </Swiper>
-                    {/* Sale Badge */}
+
+                    {/* Premium Sale Badge */}
                     {product.sale && product.price && product.price > product.sale ? (
                         <Div
                             position="absolute"
                             top={12}
                             left={12}
                             bg="#ff6b35"
-                            px={10}
-                            py={4}
-                            rounded="circle"
-                            shadow="md"
+                            px={12}
+                            py={6}
+                            rounded={15}
+                            shadow="lg"
+                            borderWidth={2}
+                            borderColor="rgba(255,255,255,0.3)"
                         >
-                            <Text color="white" fontWeight="bold" fontSize={12}>
-                                {`Save ${product.price - product.sale} ${i18n.language === "ar" ? api_config.currency_ar : api_config.currency_en
-                                    }`}
-                            </Text>
+                            <Div flexDir="row" alignItems="center">
+                                <Feather name="tag" size={12} color="white" />
+                                <Text color="white" fontWeight="bold" fontSize={11} ml={4}>
+                                    {`-${Math.round(((product.price - product.sale) / product.price) * 100)}%`}
+                                </Text>
+                            </Div>
                         </Div>
                     ) : (
                         <Div
                             position="absolute"
                             top={12}
                             left={12}
-                            bg="#ff6b35"
-                            px={10}
-                            py={4}
-                            rounded="circle"
-                            shadow="md"
+                            bg="#4CAF50"
+                            px={12}
+                            py={6}
+                            rounded={15}
+                            shadow="lg"
+                            borderWidth={2}
+                            borderColor="rgba(255,255,255,0.3)"
                         >
-                            <Text color="white" fontWeight="bold" fontSize={12}>
-                                {t("buy_now_and_enjoy")}
-                            </Text>
+                            <Div flexDir="row" alignItems="center">
+                                <Feather name="star" size={12} color="white" />
+                                <Text color="white" fontWeight="bold" fontSize={11} ml={4}>
+                                    NEW
+                                </Text>
+                            </Div>
                         </Div>
                     )}
-                    {/* Wishlist Button */}
+
+                    {/* Enhanced Wishlist Button */}
                     <Button
-                        bg="white"
-                        shadow="md"
+                        bg="rgba(255,255,255,0.95)"
+                        shadow="lg"
                         right={12}
                         top={12}
                         position="absolute"
                         p={0}
-                        h={36}
-                        w={36}
+                        h={40}
+                        w={40}
                         rounded="circle"
                         onPress={() => handleAddtowishlist(product)}
                         zIndex={2}
+                        borderWidth={1}
+                        borderColor="rgba(0,0,0,0.05)"
                     >
-                        <AntDesign name="hearto" size={18} color="black" />
+                        <AntDesign name="hearto" size={18} color="#ff6b35" />
                     </Button>
                 </Div>
-            </Button>
 
-            <Div p={14}>
-                <Text  fontSize={13} mb={4} numberOfLines={2}>
-                    {product.title}
-                </Text>
-                <Div flexDir="row" justifyContent="space-between" alignItems="center" my={8}>
-                    <Div>
-                        {product.sale ? (
-                            <Div flexDir="row" alignItems="center">
-                                <Text fontWeight="bold" color="green700">
-                                    {product.sale} {i18n.language === "ar" ? api_config.currency_ar : api_config.currency_en}
-                                </Text>
-                                <Text
-                                    textDecorLine="line-through"
-                                    color="red600"
-                                    ml={8}
-                                    fontSize={13}
-                                >
+                {/* Content Section */}
+                <Div p={16}>
+                    {/* Product Title */}
+                    <Text 
+                        fontSize={15} 
+                        fontWeight="bold" 
+                        color="#2c3e50"
+                        mb={8} 
+                        numberOfLines={2}
+                        lineHeight={20}
+                    >
+                        {product.title}
+                    </Text>
+
+                    {/* Price and Stock Section */}
+                    <Div flexDir="row" justifyContent="space-between" alignItems="center" mb={12}>
+                        <Div flex={1}>
+                            {product.sale ? (
+                                <Div>
+                                    <Text fontWeight="bold" color="#27ae60" fontSize={16}>
+                                        {product.sale} {i18n.language === "ar" ? api_config.currency_ar : api_config.currency_en}
+                                    </Text>
+                                    <Text
+                                        textDecorLine="line-through"
+                                        color="#95a5a6"
+                                        fontSize={13}
+                                        mt={2}
+                                    >
+                                        {product.price} {i18n.language === "ar" ? api_config.currency_ar : api_config.currency_en}
+                                    </Text>
+                                </Div>
+                            ) : (
+                                <Text fontWeight="bold" color="#2c3e50" fontSize={16}>
                                     {product.price} {i18n.language === "ar" ? api_config.currency_ar : api_config.currency_en}
                                 </Text>
+                            )}
+                        </Div>
+
+                        {/* Modern Stock Badge */}
+                        <Div
+                            bg={product.stock > 0 ? "rgba(39, 174, 96, 0.1)" : "rgba(231, 76, 60, 0.1)"}
+                            px={10}
+                            py={6}
+                            rounded={12}
+                            borderWidth={1}
+                            borderColor={product.stock > 0 ? "rgba(39, 174, 96, 0.2)" : "rgba(231, 76, 60, 0.2)"}
+                        >
+                            <Div flexDir="row" alignItems="center">
+                                <Div
+                                    w={6}
+                                    h={6}
+                                    rounded="circle"
+                                    bg={product.stock > 0 ? "#27ae60" : "#e74c3c"}
+                                    mr={6}
+                                />
+                                <Text 
+                                    color={product.stock > 0 ? "#27ae60" : "#e74c3c"}
+                                    fontWeight="600"
+                                    fontSize={10}
+                                >
+                                    {product.stock > 0 ? t("in_stock") : t("out_of_stock")}
+                                </Text>
                             </Div>
-                        ) : (
-                            <Text fontWeight="bold">
-                                {product.price} {i18n.language === "ar" ? api_config.currency_ar : api_config.currency_en}
-                            </Text>
-                        )}
+                        </Div>
                     </Div>
-                    {/* Stock Badge */}
-                    <Div
-                        bg={product.stock > 0 ? "green600" : "red600"}
-                        px={7}
-                        py={4}
-                        rounded="circle"
-                        shadow="xs"
-                    >
-                        <Text color="white"  fontSize={11}>
-                            {product.stock > 0 ? t("in_stock") : t("out_of_stock")}
-                        </Text>
-                    </Div>
-                </Div>
-                <Div flexDir="row" justifyContent="flex-end" mt={6}>
+
+                    {/* Action Button */}
                     <Button
                         onPress={() => handle_add_to_cart(product)}
-                        bg={Custom_colors.black}
-                        h={38}
-                        w={38}
-                        rounded="circle"
+                        bg={product.stock === 0 ? "#bdc3c7" : Custom_colors.primary}
+                        h={44}
+                        w="100%"
+                        rounded={12}
                         shadow="md"
                         p={0}
                         disabled={product.stock === 0}
-                        opacity={product.stock === 0 ? 0.5 : 1}
+                        flexDir="row"
+                        alignItems="center"
+                        justifyContent="center"
                     >
-                        <MaterialIcons name="add-shopping-cart" size={20} color="white" />
+                        <Ionicons 
+                            name="bag-add" 
+                            size={20} 
+                            color="white" 
+                            style={{ marginRight: 8 }}
+                        />
+                        <Text color="white" fontWeight="bold" fontSize={14}>
+                            {product.stock === 0 ? t("out_of_stock") : t("add_to_cart")}
+                        </Text>
                     </Button>
                 </Div>
-            </Div>
-        </Div>
-        // ...existing code...
+            </Pressable>
+        </Animated.View>
     )
 }
 

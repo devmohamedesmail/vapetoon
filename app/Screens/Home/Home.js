@@ -133,7 +133,7 @@ export default function Home() {
           </Div>
 
 
-<FloatBtn />
+
           <Products />
         </Div>
       </ScrollDiv>
