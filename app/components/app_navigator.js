@@ -1,17 +1,18 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import React from 'react'
-import Home from '../Screens/Home/Home'
-import Details from '../Screens/Details/Details'
-import Checkout from '../Screens/Checkout/Checkout'
-import Login from '../Screens/Auth/Login'
-import Cart from '../Screens/Cart/Cart'
-import Wishlist from '../Screens/Wishlist/Wishlist'
-import Shop from '../Screens/Shop/Shop'
-import Account from '../Screens/Account/Account'
-import Vendor from '../Screens/Vendor/Vendor'
-import Search from '../Screens/Search/Search'
-import Register from '../Screens/Auth/Register';
-import Vendors from '../Screens/Vendors/Vendors'
+import Home from '../screens/home/home'
+
+import Details from '../screens/details/details'
+import Checkout from '../screens/checkout/checkout'
+import Login from '../screens/auth/login'
+import Cart from '../screens/cart/cart'
+import Wishlist from '../screens/wishlist/wishlist'
+import Shop from '../screens/shop/shop'
+import Account from '../screens/account/account'
+import Vendor from '../screens/vendor/vendor'
+import Search from '../screens/search/search'
+import Register from '../screens/auth/register';
+import Vendors from '../screens/vendors/vendors'
 
 
 

@@ -1,25 +1,13 @@
 import axios from "axios";
 import React, { useState, useEffect, useContext } from "react";
 import { Div, Image } from "react-native-magnus";
-import { DataContext } from "../../../../Context/DataProvider";
+import { DataContext } from "../../../../context/data_provider";
+import { api_config } from "../../../../config/api_config";
 import Swiper from "react-native-swiper";
 
 export default function Banner() {
-  const [sliders, setsliders] = useState([]);
-  const { settings } = useContext(DataContext);
 
-  const fetchSliders = async () => {
-    try {
-      const response = await axios.get(`${settings.appurl}api/show/sliders`);
-      setsliders(response.data.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
-  useEffect(() => {
-    fetchSliders();
-  }, [sliders]);
 
   return (
     <Div h={250} mb={10} overflow="hidden" mt={-70}>

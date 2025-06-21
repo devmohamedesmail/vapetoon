@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Div, ThemeProvider, Radio, Text } from "react-native-magnus";
 import { TouchableOpacity } from "react-native";
-import Custom_colors from "../../../config/Custom_colors";
+import custom_colors from "../../../config/custom_colors";
 export default function Payment_options({activePaymentMethods}) {
   const [selectedPayment, setSelectedPayment] = useState(null);
   const [cardDetails, setCardDetails] = useState({ number: "", expiry: "", cvv: "" });
@@ -18,7 +18,7 @@ export default function Payment_options({activePaymentMethods}) {
           onPress={() => handlePaymentSelection(method.id)}
         >
           <Div
-            bg={selectedPayment === method.id ? Custom_colors.primary : "blue100"}
+            bg={selectedPayment === method.id ? custom_colors.primary : "blue100"}
             px="xl"
             py="lg"
             rounded="md"

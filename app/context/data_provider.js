@@ -2,13 +2,18 @@ import axios from "axios";
 import React, { createContext, useEffect, useState } from "react";
 import { api_config } from "../config/api_config";
 
-
 export const DataContext = createContext();
 
-export default function DataProvider({ children }) {
+export default function data_provider({ children }) {
   const [categories, setCategories] = useState([]);
   const [products, setProducts] = useState([]);
 
+  // Settings object with app configuration
+  const settings = {
+    appurl: process.env.EXPO_PUBLIC_APP_URL || api_config.url,
+    currency_ar: api_config.currency_ar,
+    currency_en: api_config.currency_en,
+  };
 
 
 
@@ -16,7 +21,7 @@ export default function DataProvider({ children }) {
   const fetch_categories_data = async () => {
     try {
       const response = await axios.get(
-        `${api_config.url}/api/categories?populate=image`,
+        `${process.env.EXPO_PUBLIC_APP_URL}/categories?populate=image`,
         {
           headers: {
             Authorization: `Bearer ${api_config.token}`,
@@ -35,7 +40,7 @@ export default function DataProvider({ children }) {
   const fetch_products_data = async () => {
     try {
       const response = await axios.get(
-        `${api_config.url}/api/products?populate=*`, {
+        `${process.env.EXPO_PUBLIC_APP_URL}/products?populate=*`, {
         headers: {
           Authorization: `Bearer ${api_config.token}`,
 
@@ -43,6 +48,7 @@ export default function DataProvider({ children }) {
       }
       );
       setProducts(response.data.data);
+    
     } catch (error) {
       console.log("error fetching categories data", error);
     }
@@ -59,7 +65,7 @@ export default function DataProvider({ children }) {
   }, []);
 
   return (
-    <DataContext.Provider value={{ categories, products }}>
+    <DataContext.Provider value={{ categories, products, settings }}>
       {children}
     </DataContext.Provider>
   );

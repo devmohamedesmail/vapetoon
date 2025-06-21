@@ -1,13 +1,13 @@
 import React, { use, useEffect, useState } from 'react';
 import { ActivityIndicator, FlatList, TouchableOpacity } from 'react-native';
 import { Div, Text, Image, Input, Icon, ScrollDiv } from 'react-native-magnus';
-import Custom_colors from '../../config/Custom_colors';
+import custom_colors from '../../config/custom_colors';
 import { api_config } from '../../config/api_config';
 import axios from 'axios';
-import Vendor_item from '../../items/Vendor_item';
-import Skeleton_item from '../../items/Skeleton_item';
-import Back_Btn from '../../Component/Header/Back_Btn';
-import Bottom_Navbar from '../../Component/Bottom_Navbar/Bottom_Navbar';
+import Vendor_item from '../../items/vendor_item';
+import Skeleton_item from '../../items/skeleton_item';
+import BackBtn from '../../components/header/back_btn';
+import Bottom_Navbar from '../../components/bottom_navbar/bottom_navbar';
 
 
 export default function Vendors() {
@@ -65,10 +65,10 @@ export default function Vendors() {
 
 
   return (
-    <Div flex={1} bg={Custom_colors.screen} p={10}>
+    <Div flex={1} bg={custom_colors.screen} p={10}>
 
       <Div pt={40}>
-        <Back_Btn />
+        <BackBtn />
         <Input
           mt={10}
           placeholder="Search vendors"

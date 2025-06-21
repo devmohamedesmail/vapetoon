@@ -1,19 +1,19 @@
 import { useState,useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
-import AppNavigator from './app/Component/AppNavigator';
-import DataProvider from './app/Context/DataProvider';
+import AppNavigator from './app/components/app_navigator';
+import DataProvider from './app/context/data_provider';
 import { Provider } from 'react-redux';
-import { store ,persistor} from './app/Redux/store';
+import { store ,persistor} from './app/redux/store';
 import { PersistGate } from 'redux-persist/integration/react';
 import { I18nextProvider } from 'react-i18next';
-import i18n from './app/Translation/i18n';
-import Intro_slider from './app/Component/Intro_slider/Intro_slider';
+import i18n from './app/translation/i18n.js';
+import Intro_slider from './app/components/intro_slider/intro_slider';
 import { View,ActivityIndicator } from 'react-native';
 import { useSelector } from 'react-redux';
 import Toast from 'react-native-toast-message';
 import { StripeProvider } from '@stripe/stripe-react-native';
-import AuthProvider, { AuthContext } from './app/Context/AuthProvider';
+import AuthProvider, { AuthContext } from './app/context/auth_provider';
 
 
 

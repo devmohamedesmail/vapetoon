@@ -12,10 +12,10 @@ import Swiper from 'react-native-swiper';
 import { Ionicons, MaterialIcons, AntDesign, Feather } from '@expo/vector-icons';
 
 // Config & Redux
-import Custom_colors from "../../config/Custom_colors";
+import custom_colors from "../../config/custom_colors";
 import { api_config } from "../../config/api_config";
-import { add_to_cart } from '../../Redux/Reducers/cartReducer';
-import { add_To_wishlist } from '../../Redux/Reducers/wishlistReducer';
+import { add_to_cart } from '../../redux/reducers/cart_reducer';
+import { add_To_wishlist } from '../../redux/reducers/wishlist_reducer';
 
 const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
 
@@ -43,7 +43,7 @@ export default function Details() {
     try {
       setLoading(true);
       const response = await axios.get(
-        `https://ecommerce-strapi-ex18.onrender.com/api/products?filters[id][$eq]=${productId}&populate[category]=true&populate[vendor]=true&populate[images]=true&populate[attributes][populate][values][populate]=image`,
+        `${process.env.EXPO_PUBLIC_APP_URL}/products?filters[id][$eq]=${productId}&populate[category]=true&populate[vendor]=true&populate[images]=true&populate[attributes][populate][values][populate]=image`,
         {
           headers: {
             Authorization: `Bearer ${api_config.token}`,

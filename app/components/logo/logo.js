@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Div, Image } from "react-native-magnus";
-import { DataContext } from "../../Context/DataProvider";
+import { DataContext } from "../../context/data_provider";
 
 export default function Logo({ h, w }) {
   const {categories, products, settings} =

@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { Div, Image, ScrollDiv, Text } from 'react-native-magnus'
-import Custom_colors from '../../config/Custom_colors'
-import Header from '../../Component/Header/Header'
-import Bottom_Navbar from '../../Component/Bottom_Navbar/Bottom_Navbar'
+import custom_colors from '../../config/custom_colors'
+import Header from '../../components/header/header'
+import Bottom_Navbar from '../../components/bottom_navbar/bottom_navbar'
 import { api_config } from '../../config/api_config'
 import axios from 'axios'
 
-
-import Product_card_item from '../../items/Product_card_item'
-import Products_skeleton from '../../skeletons/Products_skeleton'
+import Product_card_item from '../../items/product_card_item'
+import Products_skeleton from '../../skeletons/products_skeleton'
 export default function Shop({ route }) {
   const category = route?.params?.category;
   const [products, setProducts] = useState(null);
@@ -73,7 +72,7 @@ export default function Shop({ route }) {
       <Div pt={15} bg="white">
         <Header bg="transparent" />
       </Div>
-      <ScrollDiv bg={Custom_colors.screen}>
+      <ScrollDiv bg={custom_colors.screen}>
         {/* header Category Section start */}
         {category?.image?.url && (
           <Div position="relative">

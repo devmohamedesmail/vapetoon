@@ -1,12 +1,12 @@
 
 import React from 'react'
 import { Div, ScrollDiv, Text, Image } from 'react-native-magnus'
-import Header from '../../Component/Header/Header'
-import Custom_colors from '../../config/Custom_colors';
+import Header from '../../components/header/header'
+import custom_colors from '../../config/custom_colors';
 import { useRoute } from '@react-navigation/native';
 import { FlatList } from 'react-native';
 import Swiper from 'react-native-swiper'
-import Search_item from '../../items/Search_item';
+import Search_item from '../../items/search_item';
 import { useTranslation } from 'react-i18next';
 
 export default function Search() {
@@ -15,7 +15,7 @@ export default function Search() {
     const {t}=useTranslation();
 
     return (
-        <Div flex={1} bg={Custom_colors.screen}>
+        <Div flex={1} bg={custom_colors.screen}>
 
 
 

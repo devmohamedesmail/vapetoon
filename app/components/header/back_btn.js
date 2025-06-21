@@ -5,7 +5,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { useTranslation } from 'react-i18next';
 
-export default function Back_Btn({ color = "#1f2937", showText = false, size = 44 }) {
+export default function BackBtn({ color = "#1f2937", showText = false, size = 44 }) {
     const navigation = useNavigation();
     const { t } = useTranslation();
     

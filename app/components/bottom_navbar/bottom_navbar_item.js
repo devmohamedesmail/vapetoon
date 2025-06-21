@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, Div, Text } from "react-native-magnus";
-import Custom_colors from "../../config/Custom_colors";
+import custom_colors from "../../config/custom_colors";
 
 export default function Bottom_Navbar_item({ icon, title, onPress, counter }) {
   return (
@@ -16,7 +16,7 @@ export default function Bottom_Navbar_item({ icon, title, onPress, counter }) {
           position="absolute"
           top={-5}
           right={9}
-          bg={Custom_colors.primary}
+          bg={custom_colors.primary}
           w={20}
           h={20}
           rounded="circle"

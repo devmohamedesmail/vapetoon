@@ -1,4 +1,4 @@
-const Custom_colors = {
+const custom_colors = {
   'primary': '#000',
   'secondary': '#ff6b35',
   'light': '#e5e5e5',
@@ -22,4 +22,4 @@ const Custom_colors = {
   'border': '#ced4da'
 };
 
-export default Custom_colors;
+export default custom_colors;

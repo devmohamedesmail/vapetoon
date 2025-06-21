@@ -1,12 +1,12 @@
 import React, { useContext, useState, useEffect } from 'react'
 import { Div, Text } from 'react-native-magnus'
-import { DataContext } from '../../../../Context/DataProvider'
+import { DataContext } from '../../../../context/data_provider'
 import Category_item from './Category_item'
 import Category_skeleton from './Category_skeleton'
 import { useNavigation } from '@react-navigation/native'
 import { useTranslation } from 'react-i18next'
 import { api_config } from '../../../../config/api_config'
-import { CustomSectionTitle } from '../../../../Custom_Components/CustomSectionTitle'
+import { CustomSectionTitle } from '../../../../custom_components/custom_section_title'
 
 
 export default function Categories_Section() {

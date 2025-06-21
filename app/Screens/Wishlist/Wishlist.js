@@ -1,15 +1,15 @@
 import React, { useContext } from "react";
 import { Div, ScrollDiv, Text } from "react-native-magnus";
-import Custom_colors from "../../config/Custom_colors";
-import Header from "../../Component/Header/Header";
-import Bottom_Navbar from "../../Component/Bottom_Navbar/Bottom_Navbar";
+import custom_colors from "../../config/custom_colors";
+import Header from "../../components/header/header";
+import Bottom_Navbar from "../../components/bottom_navbar/bottom_navbar";
 import { useDispatch, useSelector } from "react-redux";
-import WishlistItem from "./WishlistItem";
-import { remove_From_wishlist } from "../../Redux/Reducers/wishlistReducer";
+import WishlistItem from "./wishlist_item";
+import { remove_From_wishlist } from "../../redux/reducers/wishlist_reducer";
 import Toast from "react-native-toast-message";
 import { useTranslation } from "react-i18next";
 import { useNavigation } from "@react-navigation/native";
-import { DataContext } from "../../Context/DataProvider";
+import { DataContext } from "../../context/data_provider";
 import { api_config } from "../../config/api_config";
 
 export default function Wishlist() {

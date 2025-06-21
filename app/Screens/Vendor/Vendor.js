@@ -1,13 +1,13 @@
 
 import { Div, Image, ScrollDiv, Text, Skeleton } from 'react-native-magnus'
-import Header from '../../Component/Header/Header'
-import Custom_colors from '../../config/Custom_colors'
+import Header from '../../components/header/header'
+import custom_colors from '../../config/custom_colors'
 import { useRoute } from '@react-navigation/native';
 import axios from 'axios';
 import { api_config } from '../../config/api_config';
 import { useEffect, useState } from 'react';
-import Product_card_item from '../../items/Product_card_item';
-import Bottom_Navbar from '../../Component/Bottom_Navbar/Bottom_Navbar';
+import Product_card_item from '../../items/product_card_item';
+import Bottom_Navbar from '../../components/bottom_navbar/bottom_navbar';
 
 export default function Vendor() {
     const route = useRoute()
@@ -41,7 +41,7 @@ export default function Vendor() {
     }, [vendorId])
 
     return (
-        <Div flex={1} bg={Custom_colors.screen}>
+        <Div flex={1} bg={custom_colors.screen}>
             <Div pt={15} bg="white">
                 <Header bg="transparent" />
 

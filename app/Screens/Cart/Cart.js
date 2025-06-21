@@ -7,12 +7,14 @@ import { useNavigation } from "@react-navigation/native";
 import { LinearGradient } from 'expo-linear-gradient';
 
 // Components & Items
-import Cart_item from "../../items/Cart_item";
-import Bottom_Navbar from "../../Component/Bottom_Navbar/Bottom_Navbar";
+// import Cart_item from "../../items/cart_item";
+import Cart_item from "../../items/cart_item";
+
+import Bottom_Navbar from "../../components/bottom_navbar/bottom_navbar";
 
 // Config & Context
 import { api_config } from "../../config/api_config";
-import { AuthContext } from "../../Context/AuthProvider";
+import { AuthContext } from "../../context/auth_provider";
 
 // Icons
 import { Ionicons, MaterialIcons, Feather } from '@expo/vector-icons';

@@ -5,8 +5,8 @@ import { useTranslation } from 'react-i18next'
 import { Div, Text, Skeleton, Button, Icon, Input ,Modal} from 'react-native-magnus'
 import { api_config } from '../../../config/api_config';
 import { useFormik } from 'formik';
-import Custom_button from '../../../Custom_Components/Custom_button';
-import Custom_spinner from '../../../Custom_Components/Custom_spinner';
+import custom_button from '../../../custom_components/custom_button';
+import Custom_spinner from '../../../custom_components/custom_spinner';
 
 
 
@@ -137,7 +137,7 @@ export default function Product_review({ product }) {
 
 
 
-            <Custom_button title={t('add-review')} onPress={() => setVisible(true)} />
+            <custom_button title={t('add-review')} onPress={() => setVisible(true)} />
 
             {reviews === null ? (
                 // Skeleton loader
@@ -222,7 +222,7 @@ export default function Product_review({ product }) {
                     </Div>
 
 
-                    {loading ? <Custom_spinner /> :                     <Custom_button title={t('Submit')} onPress={formik.handleSubmit} disabled={formik.values.rating === 0 || !formik.values.comment} /> }
+                    {loading ? <Custom_spinner /> :                     <custom_button title={t('Submit')} onPress={formik.handleSubmit} disabled={formik.values.rating === 0 || !formik.values.comment} /> }
                 </Div>
             </Modal>
 

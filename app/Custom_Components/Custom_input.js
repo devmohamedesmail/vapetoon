@@ -1,8 +1,8 @@
 import React from 'react'
 import { Input, Icon, Div, Text } from 'react-native-magnus'
-import Custom_colors from '../config/Custom_colors'
+import custom_colors from '../config/custom_colors'
 
-export default function Custom_input({ value, placeholder, onChangeText, icon, secureTextEntry = false ,prefix,error}) {
+export default function custom_input({ value, placeholder, onChangeText, icon, secureTextEntry = false ,prefix,error}) {
     return (
 
         <Div>
@@ -12,7 +12,7 @@ export default function Custom_input({ value, placeholder, onChangeText, icon, s
                 onChangeText={onChangeText}
                 mt="md"
                 p={10}
-                focusBorderColor={Custom_colors.primary}
+                focusBorderColor={custom_colors.primary}
                 prefix={prefix}
                 suffix={icon}
                 secureTextEntry={secureTextEntry}

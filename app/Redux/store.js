@@ -14,8 +14,8 @@ import {
 
 
 
-import  cartReducer from './Reducers/cartReducer'
-import wishlistReducer from './Reducers/wishlistReducer'
+import  cart_reducer from './reducers/cart_reducer'
+import wishlist_reducer from './reducers/wishlist_reducer'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { combineReducers } from 'redux';
 
@@ -26,8 +26,8 @@ const persistConfig = {
 }
 
 const rootReducer = combineReducers({
-  cart: cartReducer,
-  wishlist: wishlistReducer,
+  cart: cart_reducer,
+  wishlist: wishlist_reducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
@@ -56,7 +56,7 @@ export { store, persistor };
 
 // export const store = configureStore({
 //   reducer: {
-//     cart : cartReducer,
-//     wishlist: wishlistReducer,
+//     cart : cart_reducer,
+//     wishlist: wishlist_reducer,
 //   },
 // })

@@ -11,12 +11,12 @@ import Toast from 'react-native-toast-message'
 import { LinearGradient } from 'expo-linear-gradient'
 
 // Components
-import Bottom_Navbar from '../../Component/Bottom_Navbar/Bottom_Navbar'
+import Bottom_Navbar from '../../components/bottom_navbar/bottom_navbar'
 
 // Config & Context
 import { api_config } from '../../config/api_config'
-import { AuthContext } from '../../Context/AuthProvider'
-import { clear_cart } from '../../Redux/Reducers/cartReducer'
+import { AuthContext } from '../../context/auth_provider'
+import { clear_cart } from '../../redux/reducers/cart_reducer'
 
 // Icons
 import { Ionicons, MaterialIcons, Feather, FontAwesome } from '@expo/vector-icons'

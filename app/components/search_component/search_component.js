@@ -1,9 +1,9 @@
 import React, { useContext, useState } from 'react'
 import { Input, Icon, Div } from "react-native-magnus";
 import { Pressable } from 'react-native';
-import Custom_colors from '../../config/Custom_colors';
+import custom_colors from '../../config/custom_colors';
 import { useTranslation } from 'react-i18next';
-import { DataContext } from '../../Context/DataProvider';
+import { DataContext } from '../../context/data_provider';
 import { useNavigation } from '@react-navigation/native';
 
 export default function SearchComponent({ 
@@ -55,7 +55,7 @@ export default function SearchComponent({
                 color={gradient ? "white" : "gray900"}
                 px={16}
                 py={8}
-                focusBorderColor={gradient ? "rgba(255,255,255,0.5)" : Custom_colors.secondary}
+                focusBorderColor={gradient ? "rgba(255,255,255,0.5)" : custom_colors.secondary}
                 autoFocus={autoFocus}
                 suffix={
                     <Div flexDir="row" alignItems="center">

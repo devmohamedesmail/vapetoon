@@ -3,10 +3,10 @@ import React, { useContext } from 'react'
 import { Drawer, Div, Button } from 'react-native-magnus'
 import Octicons from '@expo/vector-icons/Octicons';
 import Toggle_Lang from '../Toggle_Lang/Toggle_Lang';
-import Custom_button from '../../Custom_Components/Custom_button';
+import custom_button from '../../custom_components/custom_button';
 import { useTranslation } from 'react-i18next';
 import { useNavigation } from '@react-navigation/native';
-import { AuthContext } from '../../Context/AuthProvider';
+import { AuthContext } from '../../context/auth_provider';
 export default function Drawer_account() {
   const drawerRef = React.createRef();
   const {t}=useTranslation();
@@ -33,7 +33,7 @@ export default function Drawer_account() {
         <Div px={10} pt={30} h={"100%"} >
           <Div flexDir='column' position='absolute' bottom={30} right={10} left={10} >
             <Toggle_Lang />
-            <Custom_button title={t('Logout')} onPress={()=>handle_logout_user()}  />
+            <custom_button title={t('Logout')} onPress={()=>handle_logout_user()}  />
             
           </Div>
         </Div>

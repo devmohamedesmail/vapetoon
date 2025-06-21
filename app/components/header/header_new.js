@@ -3,12 +3,12 @@ import { StatusBar, Pressable } from "react-native";
 import { Div, Button, Text } from "react-native-magnus";
 import { Ionicons, MaterialIcons, Feather } from "@expo/vector-icons";
 import { LinearGradient } from 'expo-linear-gradient';
-import Logo from "../Logo/Logo";
-import HeaderItem from "./HeaderItem";
-import Back_Btn from "./Back_Btn";
+import Logo from "../logo/logo";
+import HeaderItem from "./header_item";
+import BackBtn from "./back_btn";
 import { useSelector } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
-import SearchComponent from "../SearchComponent/SearchComponent";
+import SearchComponent from "../search_component/search_component";
 import { useTranslation } from "react-i18next";
 
 export default function Header({ 
@@ -80,7 +80,7 @@ export default function Header({
           </Div>
         ) : (
           <Div flexDir="row" alignItems="center">
-            <Back_Btn color={gradient ? "white" : "#1f2937"} />
+            <BackBtn color={gradient ? "white" : "#1f2937"} />
             {title && !showSearch && (
               <Text 
                 fontSize={20} 

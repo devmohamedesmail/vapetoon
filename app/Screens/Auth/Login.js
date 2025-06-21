@@ -3,17 +3,17 @@ import React, { useContext, useState, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button, Text, Div, Snackbar, SnackbarRef, Icon } from 'react-native-magnus';
 
-import Logo from '../../Component/Logo/Logo';
-import Custom_input from '../../Custom_Components/Custom_input';
-import Custom_button from '../../Custom_Components/Custom_button';
+import Logo from '../../components/logo/logo';
+import custom_input from '../../custom_components/custom_input';
+import custom_button from '../../custom_components/custom_button';
 import Ionicons from '@expo/vector-icons/Ionicons';
-import Custom_colors from '../../config/Custom_colors';
+import custom_colors from '../../config/custom_colors';
 import Feather from '@expo/vector-icons/Feather';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { AuthContext } from '../../Context/AuthProvider';
-import Custom_spinner from '../../Custom_Components/Custom_spinner';
+import { AuthContext } from '../../context/auth_provider';
+import Custom_spinner from '../../custom_components/custom_spinner';
 
 
 export default function Login() {
@@ -117,14 +117,14 @@ export default function Login() {
 
 
         <Div mt={100}>
-          <Custom_input
+          <custom_input
             value={formik.values.identifier}
             placeholder={t('email')}
             onChangeText={formik.handleChange('identifier')}
             prefix={<Feather name="mail" size={14} color="black" />}
             error={formik.errors.identifier}
           />
-          <Custom_input
+          <custom_input
             value={formik.values.password}
             placeholder="*************"
             onChangeText={formik.handleChange('password')}
@@ -135,10 +135,10 @@ export default function Login() {
 
           />
            {error && <Text textAlign='center' color='red'>{t('invalid-credentials')}</Text>}
-          {loading ? <Custom_spinner /> : <Custom_button title={t('login')} onPress={formik.handleSubmit} />}
+          {loading ? <Custom_spinner /> : <custom_button title={t('login')} onPress={formik.handleSubmit} />}
 
           <Text textAlign='center' fontWeight='bold'> Or </Text>
-          <Custom_button bg={Custom_colors.secondary} onPress={() => navigation.navigate('Register')} title={t('register')} />
+          <custom_button bg={custom_colors.secondary} onPress={() => navigation.navigate('Register')} title={t('register')} />
 
         </Div>
 

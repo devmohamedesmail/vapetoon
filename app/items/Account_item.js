@@ -2,9 +2,9 @@ import React from 'react'
 import { Pressable } from 'react-native'
 import { Button, Div, Image, Text } from 'react-native-magnus'
 import { Ionicons } from '@expo/vector-icons'
-import Custom_colors from '../config/Custom_colors'
+import custom_colors from '../config/custom_colors'
 
-export default function Account_item({ image, onPress, title, icon, isActive = false, color = Custom_colors.primary }) {
+export default function Account_item({ image, onPress, title, icon, isActive = false, color = custom_colors.primary }) {
   return (
     <Pressable onPress={onPress} style={{ marginHorizontal: 8 }}>
       <Div

@@ -1,14 +1,14 @@
 import React, { useState } from 'react'
 import { Div, ScrollDiv, Text, Image, Button } from 'react-native-magnus'
-import Custom_colors from '../../config/Custom_colors'
+import custom_colors from '../../config/custom_colors'
 import Categories_Section from './parts/Categories/Categories_Section'
 import Products from './parts/Products/Products'
-import Bottom_Navbar from '../../Component/Bottom_Navbar/Bottom_Navbar'
-import Header from '../../Component/Header/Header'
+import Bottom_Navbar from '../../components/bottom_navbar/bottom_navbar'
+import Header from '../../components/header/header'
 import Banner from './parts/Banner/Banner'
 import Featured from './parts/Featured/Featured'
 import { RefreshControl } from 'react-native'
-import FloatBtn from '../../Component/FloatBtn/FloatBtn'
+import FloatBtn from '../../components/float_btn/float_btn'
 
 export default function Home() {
   const [headerBg, setHeaderBg] = useState('transparent');
@@ -29,14 +29,14 @@ export default function Home() {
   }, []);
 
   return (
-    <Div flex={1} bg={Custom_colors.screen}>
+    <Div flex={1} bg={custom_colors.screen}>
 
       <Div position="absolute" top={0} left={0} w="100%" zIndex={10}>
         <Header logo={true} bg={headerBg} />
       </Div>
 
       <ScrollDiv
-        bg={Custom_colors.screen}
+        bg={custom_colors.screen}
         contentContainerStyle={{ paddingTop: 60 }}
         onScroll={handleScroll}
         scrollEventThrottle={16}

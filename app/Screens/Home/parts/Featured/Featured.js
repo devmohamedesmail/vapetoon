@@ -1,7 +1,7 @@
 import { useContext, useMemo } from 'react';
 import { Button, Div, Image, Text, Skeleton } from 'react-native-magnus'
 import Swiper from 'react-native-swiper'
-import { DataContext } from '../../../../Context/DataProvider';
+import { DataContext } from '../../../../context/data_provider';
 import { useNavigation } from '@react-navigation/native';
 
 export default function Featured() {

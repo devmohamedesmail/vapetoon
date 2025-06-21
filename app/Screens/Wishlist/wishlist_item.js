@@ -5,7 +5,7 @@ import { Ionicons, MaterialIcons, Feather } from "@expo/vector-icons";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { api_config } from "../../config/api_config";
-import { add_to_cart } from "../../Redux/Reducers/cartReducer";
+import { add_to_cart } from "../../redux/reducers/cart_reducer";
 import Toast from "react-native-toast-message";
 
 export default function WishlistItem({ item, onPress, showDetails, onRemove }) {

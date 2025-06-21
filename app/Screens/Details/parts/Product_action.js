@@ -1,11 +1,11 @@
 import React from "react";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { Div, ScrollDiv, Text, Button } from "react-native-magnus";
-import Custom_colors from "../../../config/Custom_colors";
+import custom_colors from "../../../config/custom_colors";
 import { useNavigation } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import { add_to_cart } from "../../../Redux/Reducers/cartReducer";
+import { add_to_cart } from "../../../redux/reducers/cart_reducer";
 import Toast from "react-native-toast-message";
 import AntDesign from '@expo/vector-icons/AntDesign';
 import Entypo from '@expo/vector-icons/Entypo';
@@ -78,10 +78,10 @@ const handle_add_to_cart = (product) => {
       <Button
         h={45}
         flex={1}
-        bg={Custom_colors.primary}
+        bg={custom_colors.primary}
         rounded={8}
         borderWidth={1}
-        borderColor={Custom_colors.primary}
+        borderColor={custom_colors.primary}
         m={3}
         onPress={() => handle_add_to_cart(product)}
       >
@@ -89,9 +89,9 @@ const handle_add_to_cart = (product) => {
           <MaterialIcons
             name="add-shopping-cart"
             size={20}
-            color={Custom_colors.white}
+            color={custom_colors.white}
           />
-          <Text color={Custom_colors.white}> {t("add-to-cart")} </Text>
+          <Text color={custom_colors.white}> {t("add-to-cart")} </Text>
         </Div>
       </Button>
 
@@ -99,7 +99,7 @@ const handle_add_to_cart = (product) => {
         h={45}
         w={45}
         p={0}
-        bg={Custom_colors.white}
+        bg={custom_colors.white}
         onPress={() => handle_add_wishlist(product)}
       >
         <AntDesign name="hearto" size={24} color="black" />
@@ -108,7 +108,7 @@ const handle_add_to_cart = (product) => {
         h={45}
         w={45}
         p={0}
-        bg={Custom_colors.white}
+        bg={custom_colors.white}
         onPress={() => navigation.navigate("Vendor", { vendorId: product.vendor.id })}
       >
         <Entypo name="shop" size={24} color="black" />
