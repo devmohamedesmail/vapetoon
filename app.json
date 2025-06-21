@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "VapeToon",
-    "slug": "vapetoon",
+    "name": "Vendora App",
+    "slug": "vendora-app",
     "version": "1.0.3",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -15,7 +15,7 @@
     "ios": {
       "supportsTablet": true,
       "buildNumber": "1.0.3",
-      "bundleIdentifier": "com.dev.mohamed.esmail.vapetoon",
+      "bundleIdentifier": "com.dev.mohamed.esmail.vendora-app",
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false
       }
@@ -26,14 +26,14 @@
         "backgroundColor": "#ffffff"
       },
       "package": "com.dev.mohamed.esmail.vapetoon",
-      "versionCode":3
+      "versionCode": 3
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "extra": {
       "eas": {
-        "projectId": "4bb6b717-e3fc-4a3e-aa43-bacc8792b991"
+        "projectId": "e7f5712d-862e-4aac-b35f-8fbadbf71ca8"
       }
     }
   }
