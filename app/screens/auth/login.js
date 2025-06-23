@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { Button, Text, Div, Snackbar, SnackbarRef, Icon } from 'react-native-magnus';
 
 import Logo from '../../components/logo/logo';
-import custom_input from '../../custom_components/custom_input';
+import CustomInput from '../../custom_components/custom_input';
 import Custom_Button from '../../custom_components/custom_button';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import custom_colors from '../../config/custom_colors';
@@ -117,14 +117,14 @@ export default function Login() {
 
 
         <Div mt={100}>
-          <custom_input
+          <CustomInput
             value={formik.values.identifier}
             placeholder={t('email')}
             onChangeText={formik.handleChange('identifier')}
             prefix={<Feather name="mail" size={14} color="black" />}
             error={formik.errors.identifier}
           />
-          <custom_input
+          <CustomInput
             value={formik.values.password}
             placeholder="*************"
             onChangeText={formik.handleChange('password')}

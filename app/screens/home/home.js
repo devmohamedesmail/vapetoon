@@ -10,6 +10,7 @@ import Banner from './parts/Banner/Banner'
 import Featured from './parts/Featured/Featured'
 import { RefreshControl } from 'react-native'
 import FloatBtn from '../../components/float_btn/float_btn'
+import Spinner_Loading from '../../components/spinner_loading/spinner_loading'
 
 export default function Home() {
   const { t, i18n } = useTranslation();

@@ -13,6 +13,7 @@ import Vendor from '../screens/vendor/vendor'
 import Search from '../screens/search/search'
 import Register from '../screens/auth/register';
 import Vendors from '../screens/vendors/vendors'
+import Add_Address from '../screens/addresses/add'
 
 
 
@@ -23,8 +24,8 @@ export default function AppNavigator() {
     <Stack.Navigator 
       initialRouteName='Home'
        screenOptions={{
-        animation: 'fade', // or 'slide_from_right', 'slide_from_left', 'slide_from_bottom', 'none'
-        animationDuration: 700,
+        animation: 'slide_from_bottom', // or 'slide_from_right', 'slide_from_left', 'slide_from_bottom', 'none'
+        animationDuration: 200,
         headerShown: false
       }}
       
@@ -41,6 +42,7 @@ export default function AppNavigator() {
         <Stack.Screen name='Vendor' component={Vendor}  />
         <Stack.Screen name='Search' component={Search}  />
         <Stack.Screen name='Vendors' component={Vendors}  />
+        <Stack.Screen name='AddAddress' component={Add_Address}  />
 
        
     </Stack.Navigator>

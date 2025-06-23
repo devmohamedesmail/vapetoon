@@ -2,11 +2,7 @@ import React, { useContext } from 'react'
 import { Pressable, Dimensions, Platform } from 'react-native'
 import { Div, Text } from 'react-native-magnus'
 import Svg, { Path, Defs, LinearGradient, Stop } from 'react-native-svg'
-
-// Icons
 import { Ionicons, Foundation, Feather } from '@expo/vector-icons'
-
-// Config & Context
 import custom_colors from '../../config/custom_colors'
 import { useNavigation, useRoute } from '@react-navigation/native'
 import { useTranslation } from 'react-i18next'
@@ -23,7 +19,7 @@ const TabItem = ({ icon, activeIcon, label, isActive, onPress, badge }) => (
       <Text 
         fontSize={9} 
         fontWeight={isActive ? "600" : "500"}
-        color={isActive ? custom_colors.primary : "#9ca3af"}
+        color={isActive ? custom_colors.primary : "#fff"}
         mt={2}
       >
         {label}
@@ -106,7 +102,7 @@ export default function Bottom_Navbar() {
 
   const currentRoute = route.name
   const isActive = (routeNames) => routeNames.includes(currentRoute)
-
+//url(#grad)
   return (
     <Div position="absolute" bottom={0} left={0} right={0} zIndex={1000}>
       {/* Enhanced Curved Background using SVG */}
@@ -119,8 +115,8 @@ export default function Bottom_Navbar() {
         </Defs>
         <Path
           d={`M0,25 Q${screenWidth/4},8 ${screenWidth/2},8 Q${screenWidth*3/4},8 ${screenWidth},25 L${screenWidth},85 L0,85 Z`}
-          fill="url(#grad)"
-          stroke="rgba(229, 231, 235, 0.3)"
+          fill="#ff6b35"
+          stroke="rgba(20, 86, 220, 0.3)"
           strokeWidth={0.5}
         />
       </Svg>
@@ -136,7 +132,7 @@ export default function Bottom_Navbar() {
       >
         {/* Home Tab */}
         <TabItem
-          icon={<Ionicons name="home-outline" size={22} color="#9ca3af" />}
+          icon={<Ionicons name="home-outline" size={22} color="#fff" />}
           activeIcon={<Ionicons name="home" size={22} color={custom_colors.primary} />}
           label={t('home')}
           isActive={isActive(['Home'])}
@@ -145,7 +141,7 @@ export default function Bottom_Navbar() {
 
         {/* Vendors Tab */}
         <TabItem
-          icon={<Foundation name="torsos-all" size={22} color="#9ca3af" />}
+          icon={<Foundation name="torsos-all" size={22} color="#fff" />}
           activeIcon={<Foundation name="torsos-all" size={22} color={custom_colors.primary} />}
           label={t('vendors')}
           isActive={isActive(['Vendors'])}
@@ -162,7 +158,7 @@ export default function Bottom_Navbar() {
 
         {/* Shop Tab */}
         <TabItem
-          icon={<Ionicons name="storefront-outline" size={22} color="#9ca3af" />}
+          icon={<Ionicons name="storefront-outline" size={22} color="#fff" />}
           activeIcon={<Ionicons name="storefront" size={22} color={custom_colors.primary} />}
           label={t('shop')}
           isActive={isActive(['Shop'])}
@@ -171,7 +167,7 @@ export default function Bottom_Navbar() {
 
         {/* Account Tab */}
         <TabItem
-          icon={<Feather name="user" size={22} color="#9ca3af" />}
+          icon={<Feather name="user" size={22} color="#fff" />}
           activeIcon={<Feather name="user" size={22} color={custom_colors.primary} />}
           label={t('account')}
           isActive={isActive(['Account', 'Login'])}

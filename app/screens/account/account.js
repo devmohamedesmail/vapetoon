@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { StatusBar, Pressable, RefreshControl, Alert, ScrollView } from 'react-native'
 import { Div, Text, Image, Skeleton, ScrollDiv, Button } from 'react-native-magnus'
-import { LinearGradient } from 'expo-linear-gradient'
 import Header from '../../components/header/header'
 import Bottom_Navbar from '../../components/bottom_navbar/bottom_navbar'
 import { useTranslation } from 'react-i18next'
@@ -13,6 +12,8 @@ import { Ionicons, MaterialIcons, Feather, FontAwesome } from '@expo/vector-icon
 import Toast from 'react-native-toast-message'
 import custom_colors from '../../config/custom_colors'
 import Toggle_Lang from '../../components/toggle_lang/toggle_lang'
+import Profile_Header from '../../components/profile_header/profile_header'
+import Address_Tab_User from '../../components/address_tab_user/address_tab_user'
 
 export default function Account() {
     const { t, i18n } = useTranslation();
@@ -215,60 +216,7 @@ export default function Account() {
         </Div>
     );
     // Addresses Tab Component
-    const AddressesTab = () => (
-        <Div p={20}>
-            <Div flexDir="row" alignItems="center" justifyContent="space-between" mb={20}>
-                <Div flexDir="row" alignItems="center">
-                    <Ionicons name="location-outline" size={24} color="#059669" />
-                    <Text fontSize={20} fontWeight="700" color="#1f2937" ml={12}>
-                        {t('addresses') || 'My Addresses'}
-                    </Text>
-                </Div>
-                <Button
-                    bg="#059669"
-                    h={36}
-                    px={16}
-                    rounded={10}
-                    onPress={() => {/* Add new address logic */}}
-                >
-                    <Ionicons name="add" size={16} color="white" />
-                </Button>
-            </Div>
-            
-            <Div alignItems="center" py={60}>
-                <Div 
-                    w={80} 
-                    h={80} 
-                    rounded="circle" 
-                    bg="rgba(5, 150, 105, 0.1)" 
-                    alignItems="center" 
-                    justifyContent="center"
-                    mb={20}
-                >
-                    <Ionicons name="location-outline" size={40} color="#059669" />
-                </Div>
-                <Text fontSize={18} fontWeight="600" color="#1f2937" mb={8}>
-                    {t('no_addresses') || 'No addresses saved'}
-                </Text>
-                <Text fontSize={14} color="#6b7280" textAlign="center" mb={24}>
-                    {t('add_address_description') || 'Add your addresses for faster checkout'}
-                </Text>
-                <Button
-                    bg="#059669"
-                    h={44}
-                    px={24}
-                    rounded={12}
-                    flexDir="row"
-                    alignItems="center"
-                >
-                    <Ionicons name="add" size={16} color="white" style={{ marginRight: 8 }} />
-                    <Text color="white" fontSize={14} fontWeight="600">
-                        {t('add_address') || 'Add Address'}
-                    </Text>
-                </Button>
-            </Div>
-        </Div>
-    );
+
 
     // Profile Tab Component
     const ProfileTab = () => (
@@ -494,82 +442,7 @@ export default function Account() {
             <Header />
 
             {/* Profile Header Section */}
-            <LinearGradient
-                colors={['#1f2937', '#374151']}
-                start={{ x: 0, y: 0 }}
-                end={{ x: 1, y: 1 }}
-                style={{ paddingTop: 20, paddingBottom: 30, paddingHorizontal: 20 }}
-            >
-                <Div alignItems="center">
-                    {/* Profile Avatar */}
-                    <Div
-                        w={100}
-                        h={100}
-                        rounded="circle"
-                        bg="#f3f4f6"
-                        alignItems="center"
-                        justifyContent="center"
-                        mb={16}
-                        style={{
-                            shadowColor: '#000',
-                            shadowOffset: { width: 0, height: 4 },
-                            shadowOpacity: 0.1,
-                            shadowRadius: 12,
-                            elevation: 5,
-                        }}
-                    >
-                        {auth?.user?.avatar ? (
-                            <Image
-                                source={{ uri: auth.user.avatar }}
-                                w={100}
-                                h={100}
-                                rounded="circle"
-                                resizeMode="cover"
-                            />
-                        ) : (
-                            <Ionicons name="person" size={50} color="#6b7280" />
-                        )}
-                    </Div>
-
-                    {/* User Name */}
-                    <Text fontSize={24} fontWeight="700" color="white" mb={4}>
-                        {auth?.user?.username || 'Guest User'}
-                    </Text>
-
-                    {/* User Email */}
-                    <Text fontSize={14} color="#d1d5db" mb={20}>
-                        {auth?.user?.email || 'No email provided'}
-                    </Text>
-
-                    {/* Stats Row */}
-                    <Div flexDir="row" justifyContent="space-between" w="100%" maxW={280}>
-                        <Div alignItems="center" flex={1}>
-                            <Text fontSize={20} fontWeight="700" color="white">
-                                {userStats.totalOrders}
-                            </Text>
-                            <Text fontSize={12} color="#d1d5db">
-                                {t('orders') || 'Orders'}
-                            </Text>
-                        </Div>
-                        <Div alignItems="center" flex={1}>
-                            <Text fontSize={20} fontWeight="700" color="white">
-                                {userStats.completedOrders}
-                            </Text>
-                            <Text fontSize={12} color="#d1d5db">
-                                {t('completed') || 'Completed'}
-                            </Text>
-                        </Div>
-                        <Div alignItems="center" flex={1}>
-                            <Text fontSize={20} fontWeight="700" color="white">
-                                {userStats.totalSpent}
-                            </Text>
-                            <Text fontSize={12} color="#d1d5db">
-                                {t('spent') || 'Spent'}
-                            </Text>
-                        </Div>
-                    </Div>
-                </Div>
-            </LinearGradient>
+            <Profile_Header userStats={userStats} />
 
             {/* Tab Navigation */}
             <Div bg="white" px={20} py={16} style={{
@@ -642,7 +515,7 @@ export default function Account() {
                 contentContainerStyle={{ flexGrow: 1 }}
             >
                 {activeTab === 0 && <OrdersTab />}
-                {activeTab === 1 && <AddressesTab />}
+                {activeTab === 1 && <Address_Tab_User />}
                 {activeTab === 2 && <ProfileTab />}
                 {activeTab === 3 && <SettingsTab />}
             </ScrollView>

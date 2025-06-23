@@ -7,21 +7,21 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import { Div, Image, Button, Text } from 'react-native-magnus';
 import custom_colors from '../config/custom_colors';
 import { api_config } from '../config/api_config';
-import Toast from 'react-native-toast-message';
+
 import { useDispatch, useSelector } from 'react-redux';
 import { add_To_wishlist, remove_From_wishlist } from '../redux/reducers/wishlist_reducer';
 import { add_to_cart } from '../redux/reducers/cart_reducer';
 import { useTranslation } from 'react-i18next';
 import { useNavigation } from '@react-navigation/native';
 import Swiper from 'react-native-swiper'
-import Entypo from '@expo/vector-icons/Entypo';
+import { Toast } from 'toastify-react-native';
 
 function Product_card_item({ product }) {
     const { t, i18n } = useTranslation();
     const dispatch = useDispatch();
     const navigation = useNavigation();
     const titleScaleAnim = useRef(new Animated.Value(1)).current;
-    
+
     // Get wishlist items to check if product is in wishlist
     const wishlistItems = useSelector(state => state.wishlist.items);
     const isInWishlist = wishlistItems.some(item => item.id === product.id);
@@ -44,99 +44,38 @@ function Product_card_item({ product }) {
     const showSuccessToast = (message, icon = "shopping-cart") => {
         Toast.show({
             type: "success",
-            position: "top",
-            text1: "✅ Success!",
-            text2: message,
+            position: "center",
+            text1: t('added-successfully') || 'Added Successfully',
+            // text2: message,
             visibilityTime: 3000,
             autoHide: true,
             topOffset: 60,
-            text1Style: {
-                fontSize: 16,
-                fontWeight: 'bold',
-                color: '#27ae60'
-            },
-            text2Style: {
-                fontSize: 14,
-                color: '#2c3e50',
-                fontWeight: '500'
-            },
-            style: {
-                borderLeftColor: '#27ae60',
-                borderLeftWidth: 5,
-                backgroundColor: '#f8fff8',
-                borderRadius: 12,
-                shadowColor: '#27ae60',
-                shadowOffset: { width: 0, height: 4 },
-                shadowOpacity: 0.15,
-                shadowRadius: 8,
-                elevation: 8,
-            }
         });
     };
 
     const showErrorToast = (message) => {
         Toast.show({
             type: "error",
-            position: "top",
-            text1: "❌ Oops!",
+            position: "center",
+            text1:t('failed-to-add'),
             text2: message,
             visibilityTime: 3000,
             autoHide: true,
             topOffset: 60,
-            text1Style: {
-                fontSize: 16,
-                fontWeight: 'bold',
-                color: '#e74c3c'
-            },
-            text2Style: {
-                fontSize: 14,
-                color: '#2c3e50',
-                fontWeight: '500'
-            },
-            style: {
-                borderLeftColor: '#e74c3c',
-                borderLeftWidth: 5,
-                backgroundColor: '#fff8f8',
-                borderRadius: 12,
-                shadowColor: '#e74c3c',
-                shadowOffset: { width: 0, height: 4 },
-                shadowOpacity: 0.15,
-                shadowRadius: 8,
-                elevation: 8,
-            }
+           
         });
     };
 
     const showWishlistToast = (message, isAdding = true) => {
         Toast.show({
-            type: "info",
-            position: "top",
-            text1: isAdding ? "💖 Added to Wishlist" : "💔 Removed from Wishlist",
-            text2: message,
+            type: "success",
+            position: "center",
+            text1: isAdding ? `💖 ${t('added-successfully')}` : `💔 ${t('removed-successfully')}`,
+            // text2: message,
             visibilityTime: 3000,
             autoHide: true,
             topOffset: 60,
-            text1Style: {
-                fontSize: 16,
-                fontWeight: 'bold',
-                color: isAdding ? '#ff6b35' : '#6b7280'
-            },
-            text2Style: {
-                fontSize: 14,
-                color: '#2c3e50',
-                fontWeight: '500'
-            },
-            style: {
-                borderLeftColor: isAdding ? '#ff6b35' : '#6b7280',
-                borderLeftWidth: 5,
-                backgroundColor: isAdding ? '#fff9f6' : '#f9fafb',
-                borderRadius: 12,
-                shadowColor: isAdding ? '#ff6b35' : '#6b7280',
-                shadowOffset: { width: 0, height: 4 },
-                shadowOpacity: 0.15,
-                shadowRadius: 8,
-                elevation: 8,
-            }
+           
         });
     };
 
@@ -197,9 +136,9 @@ function Product_card_item({ product }) {
                     showsButtons={false}
                     activeDotColor={custom_colors.primary}
                     dotColor="#d1d5db"
-                    dotStyle={{ 
-                        width: 4, 
-                        height: 4, 
+                    dotStyle={{
+                        width: 4,
+                        height: 4,
                         borderRadius: 2,
                         marginLeft: 2,
                         marginRight: 2,
@@ -217,7 +156,7 @@ function Product_card_item({ product }) {
                         product.images.map((image, index) => {
                             // Handle different image structures
                             let imageUrl = '';
-                            
+
                             if (image?.formats?.thumbnail?.url) {
                                 // Image has formats with thumbnail
                                 imageUrl = image.formats.thumbnail.url;
@@ -231,7 +170,7 @@ function Product_card_item({ product }) {
                                 // Fallback - skip this image
                                 return null;
                             }
-                            
+
                             return (
                                 <Div h={160} key={index} position="relative">
                                     <Image
@@ -283,10 +222,10 @@ function Product_card_item({ product }) {
                     borderWidth={1}
                     borderColor={isInWishlist ? "#ff4757" : "#e8e8e8"}
                 >
-                    <AntDesign 
-                        name={isInWishlist ? "heart" : "hearto"} 
-                        size={14} 
-                        color={isInWishlist ? "#ff4757" : "#6b7280"} 
+                    <AntDesign
+                        name={isInWishlist ? "heart" : "hearto"}
+                        size={14}
+                        color={isInWishlist ? "#ff4757" : "#6b7280"}
                     />
                 </Button>
             </Div>
@@ -297,11 +236,11 @@ function Product_card_item({ product }) {
                 <Div >
                     <Animated.View style={{ transform: [{ scale: titleScaleAnim }] }}>
                         <Pressable onPress={handleTitlePress}>
-                            <Text 
-                                fontSize={13} 
-                                fontWeight="600" 
+                            <Text
+                                fontSize={13}
+                                fontWeight="600"
                                 color="#1f2937"
-                                mb={6} 
+                                mb={6}
                                 numberOfLines={2}
                                 lineHeight={13}
                             >
@@ -344,7 +283,7 @@ function Product_card_item({ product }) {
                             bg={product.stock > 0 ? "#10b981" : "#ef4444"}
                             mr={6}
                         />
-                        <Text 
+                        <Text
                             color={product.stock > 0 ? "#10b981" : "#ef4444"}
                             fontWeight="500"
                             fontSize={10}

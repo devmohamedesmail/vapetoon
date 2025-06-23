@@ -30,17 +30,17 @@ export default function Shop({ route }) {
   const fetch_products = async () => {
     try {
       if(category?.id){
-        const response = await axios.get(`${api_config.url}/api/products?filters[category][id][$eq]=28&populate=images`, {
+        const response = await axios.get(`${process.env.EXPO_PUBLIC_APP_URL}/products?filters[category][id][$eq]=28&populate=images`, {
           headers: {
-            Authorization: `Bearer ${api_config.token}`,
+            Authorization: `Bearer ${process.env.EXPO_PUBLIC_API_TOKEN}`,
           },
         });
         setProducts(response.data.data);
         
       }else{
-        const response = await axios.get(`${api_config.url}/api/products?populate=images`, {
+        const response = await axios.get(`${process.env.EXPO_PUBLIC_APP_URL}/products?populate=images`, {
           headers: {
-            Authorization: `Bearer ${api_config.token}`,
+            Authorization: `Bearer ${process.env.EXPO_PUBLIC_API_TOKEN}`,
           },
         });
         setProducts(response.data.data);

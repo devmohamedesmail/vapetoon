@@ -25,18 +25,20 @@ export default function Vendors() {
   const fetch_all_vendors = async () => {
     try {
       setLoading(true);
-      const response = await axios.get(`${api_config.url}/api/vendors?populate[image]=true`, {
+      const response = await axios.get(`${process.env.EXPO_PUBLIC_APP_URL}/vendors?populate[logo]=true`, {
         headers: {
-          Authorization: `Bearer ${api_config.token}`,
+          Authorization: `Bearer ${process.env.EXPO_PUBLIC_TOKEN_SECRET}`,
         }
       })
 
       const vendors = response.data.data;
+      console.log("Vendors", vendors)
       setVendors(vendors);
       setFilteredVendors(vendors);
       setLoading(false);
     } catch (error) {
       setLoading(false);
+      console.log("Error fetching vendors", error);
     } finally {
       setLoading(false);
     }
