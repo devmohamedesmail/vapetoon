@@ -3,7 +3,7 @@ import { Div, Text } from "react-native-magnus";
 import { DataContext } from "../../../../context/data_provider";
 import Product_card_item from "../../../../items/product_card_item";
 import Products_skeleton from "../../../../skeletons/products_skeleton";
-import { CustomSectionTitle } from "../../../../custom_components/custom_section_title";
+import { CustomSectionTitle } from "../../../../custom/custom_section_title";
 import { useTranslation } from "react-i18next";
 
 export default function Products() {

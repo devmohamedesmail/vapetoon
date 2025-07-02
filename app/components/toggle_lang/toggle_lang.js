@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { I18nManager } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Toast from 'react-native-toast-message';
-import Custom_spinner from '../../custom_components/custom_spinner';
+import Custom_spinner from '../../custom/custom_spinner';
 import { Pressable } from 'react-native';
 import { Ionicons, MaterialIcons, Feather, FontAwesome } from '@expo/vector-icons'
 

@@ -3,7 +3,7 @@ import React, { useContext } from 'react'
 import { Drawer, Div, Button } from 'react-native-magnus'
 import Octicons from '@expo/vector-icons/Octicons';
 import Toggle_Lang from '../toggle_lang/toggle_lang';
-import Custom_Button from '../../custom_components/custom_button';
+import Custom_Button from '../../custom/custom_button';
 import { useTranslation } from 'react-i18next';
 import { useNavigation } from '@react-navigation/native';
 import { AuthContext } from '../../context/auth_provider';

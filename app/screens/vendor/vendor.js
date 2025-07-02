@@ -38,7 +38,7 @@ export default function Vendor() {
             setError(null)
             
             const response = await axios.get(
-                `${process.env.EXPO_PUBLIC_APP_URL}/vendors?populate[logo]=true&populate[banner]=true&populate[products][populate]=images&filters[id][$eq]=${vendorId}`,
+                `${api_config.url}/vendors?populate[logo]=true&populate[banner]=true&populate[products][populate]=images&filters[id][$eq]=${vendorId}`,
                 {
                     headers: {
                         Authorization: `Bearer ${api_config.token}`,

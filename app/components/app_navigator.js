@@ -14,6 +14,10 @@ import Search from '../screens/search/search'
 import Register from '../screens/auth/register';
 import Vendors from '../screens/vendors/vendors'
 import Add_Address from '../screens/addresses/add'
+import Help from '../screens/help/help'
+import Privacy from '../screens/privacy/privacy'
+import Notifications from '../screens/notifications/notifications'
+import Developer from '../screens/developer/developer'
 
 
 
@@ -43,6 +47,10 @@ export default function AppNavigator() {
         <Stack.Screen name='Search' component={Search}  />
         <Stack.Screen name='Vendors' component={Vendors}  />
         <Stack.Screen name='AddAddress' component={Add_Address}  />
+        <Stack.Screen name='Help' component={Help}  />
+        <Stack.Screen name='Privacy' component={Privacy}  />
+        <Stack.Screen name='Notifications' component={Notifications}  />
+        <Stack.Screen name='Developer' component={Developer}  />
 
        
     </Stack.Navigator>

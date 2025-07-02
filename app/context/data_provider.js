@@ -21,7 +21,7 @@ export default function data_provider({ children }) {
   const fetch_categories_data = async () => {
     try {
       const response = await axios.get(
-        `${process.env.EXPO_PUBLIC_APP_URL}/categories?populate=image`,
+        `${api_config.url}/categories?populate=image`,
         {
           headers: {
             Authorization: `Bearer ${api_config.token}`,
@@ -40,7 +40,7 @@ export default function data_provider({ children }) {
   const fetch_products_data = async () => {
     try {
       const response = await axios.get(
-        `${process.env.EXPO_PUBLIC_APP_URL}/products?populate=*`, {
+        `${api_config.url}/products?populate=*`, {
         headers: {
           Authorization: `Bearer ${api_config.token}`,
 

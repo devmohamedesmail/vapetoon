@@ -2,15 +2,15 @@ import React, { useState } from 'react'
 import { Div, ScrollDiv, Text, Image, Button } from 'react-native-magnus'
 import { useTranslation } from 'react-i18next'
 import custom_colors from '../../config/custom_colors'
-import Categories_Section from './parts/Categories/Categories_Section'
 import Products from './parts/Products/Products'
 import Bottom_Navbar from '../../components/bottom_navbar/bottom_navbar'
 import Header from '../../components/header/header'
 import Banner from './parts/Banner/Banner'
 import Featured from './parts/Featured/Featured'
 import { RefreshControl } from 'react-native'
-import FloatBtn from '../../components/float_btn/float_btn'
-import Spinner_Loading from '../../components/spinner_loading/spinner_loading'
+import Categories_Section from '../../components/categories_section/categories_section'
+import Slide_Show from '../../components/slide_show/slide_show'
+
 
 export default function Home() {
   const { t, i18n } = useTranslation();
@@ -77,8 +77,10 @@ export default function Home() {
 
 
 
+          {/* <Categories_Section /> */}
           <Categories_Section />
-
+         
+<Slide_Show />
 
           <Div
             my={20}

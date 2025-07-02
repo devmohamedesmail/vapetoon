@@ -10,7 +10,7 @@ import * as Yup from 'yup'
 import { Toast } from 'toastify-react-native'
 import axios from 'axios'
 import { AuthContext } from '../../context/auth_provider'
-import CustomInput from '../../custom_components/custom_input'
+import CustomInput from '../../custom/custom_input'
 import custom_colors from '../../config/custom_colors'
 
 export default function Add_Address() {

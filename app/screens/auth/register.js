@@ -4,8 +4,8 @@ import { useTranslation } from 'react-i18next';
 import { Button, Text, Div, Snackbar, SnackbarRef, Icon } from 'react-native-magnus';
 
 import Logo from '../../components/logo/logo';
-import CustomInput from '../../custom_components/custom_input';
-import Custom_Button from '../../custom_components/custom_button';
+import CustomInput from '../../custom/custom_input';
+import Custom_Button from '../../custom/custom_button';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import custom_colors from '../../config/custom_colors';
 import Feather from '@expo/vector-icons/Feather';
@@ -13,7 +13,7 @@ import AntDesign from '@expo/vector-icons/AntDesign';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { AuthContext } from '../../context/auth_provider';
-import Custom_spinner from '../../custom_components/custom_spinner';
+import Custom_spinner from '../../custom/custom_spinner';
 
 
 export default function Register() {

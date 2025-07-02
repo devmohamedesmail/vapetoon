@@ -14,13 +14,13 @@ import custom_colors from '../../config/custom_colors'
 import Toggle_Lang from '../../components/toggle_lang/toggle_lang'
 import Profile_Header from '../../components/profile_header/profile_header'
 import Address_Tab_User from '../../components/address_tab_user/address_tab_user'
+import Orders_Tab_User from '../../components/address_tab_user/orders_tab_user'
+import Profile_Tab_User from '../../components/profile_tab_user/profile_tab_user'
+import Settings_Tab_User from '../../components/settings_tab_user/settings_tab_user'
 
 export default function Account() {
     const { t, i18n } = useTranslation();
     const [activeTab, setActiveTab] = useState(0);
-    const { auth, handle_logout } = useContext(AuthContext)
-    const navigation = useNavigation();
-    const [orders, setOrders] = useState(null)
     const [refreshing, setRefreshing] = useState(false)
     const [userStats, setUserStats] = useState({
         totalOrders: 0,
@@ -55,385 +55,24 @@ export default function Account() {
         }
     ]
 
-    // Orders Tab Component
-    const OrdersTab = () => (
-        <Div p={20}>
-            <Div flexDir="row" alignItems="center" mb={20}>
-                <Ionicons name="receipt-outline" size={24} color="#3b82f6" />
-                <Text fontSize={20} fontWeight="700" color="#1f2937" ml={12}>
-                    {t('order_history') || 'Order History'}
-                </Text>
-            </Div>
-
-            {orders ? (
-                <>
-                    {orders && orders.length > 0 ? (
-                        orders.map(order => (
-                            <Div key={order.id} mb={16} bg="white" rounded={16} p={20} borderWidth={1} borderColor="#f0f0f0" style={{
-                                shadowColor: '#000',
-                                shadowOffset: { width: 0, height: 2 },
-                                shadowOpacity: 0.1,
-                                shadowRadius: 8,
-                                elevation: 3,
-                            }}>
-                                {/* Order Header */}
-                                <Div flexDir="row" justifyContent="space-between" alignItems="center" mb={16}>
-                                    <Div>
-                                        <Text fontSize={16} fontWeight="600" color="#1f2937" mb={4}>
-                                            {t('order')} #{order.id}
-                                        </Text>
-                                        <Div flexDir="row" alignItems="center">
-                                            <Ionicons name="calendar-outline" size={14} color="#6b7280" />
-                                            <Text fontSize={12} color="#6b7280" ml={4}>
-                                                {new Date(order.createdAt).toLocaleDateString(undefined, {
-                                                    year: 'numeric',
-                                                    month: 'short',
-                                                    day: 'numeric'
-                                                })}
-                                            </Text>
-                                        </Div>
-                                    </Div>
-                                    <Div
-                                        bg="#ecfdf5"
-                                        px={12}
-                                        py={6}
-                                        rounded={20}
-                                        alignItems="center"
-                                        justifyContent="center"
-                                    >
-                                        <Text fontSize={12} fontWeight="600" color="#059669">
-                                            {order.status || 'Pending'}
-                                        </Text>
-                                    </Div>
-                                </Div>
-
-                                {/* Order Items */}
-                                {order.order && order.order.length > 0 && (
-                                    <Div>
-                                        <Text fontSize={14} fontWeight="600" color="#374151" mb={12}>
-                                            {t('items')} ({order.order.length})
-                                        </Text>
-                                        {order.order.slice(0, 3).map((product, index) => (
-                                            <Div key={product.id || index} flexDir="row" alignItems="center" mb={12}>
-                                                <Image
-                                                    source={{ 
-                                                        uri: product.images?.[0]?.formats?.thumbnail?.url || 
-                                                             product.image?.formats?.thumbnail?.url ||
-                                                             'https://via.placeholder.com/50x50?text=No+Image'
-                                                    }}
-                                                    h={50}
-                                                    w={50}
-                                                    rounded={12}
-                                                    mr={12}
-                                                    resizeMode="cover"
-                                                />
-                                                <Div flex={1}>
-                                                    <Text fontSize={14} fontWeight="600" color="#1f2937" numberOfLines={1}>
-                                                        {product.title || product.name}
-                                                    </Text>
-                                                    <Div flexDir="row" alignItems="center" mt={2}>
-                                                        <Text fontSize={12} color="#6b7280">
-                                                            {product.quantity}x 
-                                                        </Text>
-                                                        <Text fontSize={12} fontWeight="600" color="#1f2937" ml={4}>
-                                                            {product.price} {i18n.language === "ar" ? api_config.currency_ar : api_config.currency_en}
-                                                        </Text>
-                                                    </Div>
-                                                </Div>
-                                            </Div>
-                                        ))}
-                                        {order.order.length > 3 && (
-                                            <Text fontSize={12} color="#6b7280" textAlign="center" mt={8}>
-                                                +{order.order.length - 3} {t('more_items') || 'more items'}
-                                            </Text>
-                                        )}
-                                    </Div>
-                                )}
-
-                                {/* Order Total */}
-                                <Div borderTopWidth={1} borderTopColor="#f3f4f6" pt={16} mt={16}>
-                                    <Div flexDir="row" justifyContent="space-between" alignItems="center">
-                                        <Text fontSize={16} fontWeight="600" color="#1f2937">
-                                            {t('total') || 'Total'}:
-                                        </Text>
-                                        <Text fontSize={18} fontWeight="700" color="#1f2937">
-                                            {order.total_amount || '0.00'} {i18n.language === "ar" ? api_config.currency_ar : api_config.currency_en}
-                                        </Text>
-                                    </Div>
-                                </Div>
-                            </Div>
-                        ))
-                    ) : (
-                        <Div alignItems="center" py={60}>
-                            <Div 
-                                w={80} 
-                                h={80} 
-                                rounded="circle" 
-                                bg="rgba(59, 130, 246, 0.1)" 
-                                alignItems="center" 
-                                justifyContent="center"
-                                mb={20}
-                            >
-                                <Ionicons name="receipt-outline" size={40} color="#3b82f6" />
-                            </Div>
-                            <Text fontSize={18} fontWeight="600" color="#1f2937" mb={8}>
-                                {t('no_orders_yet') || 'No orders yet'}
-                            </Text>
-                            <Text fontSize={14} color="#6b7280" textAlign="center" mb={24}>
-                                {t('start_shopping_to_see_orders') || 'Start shopping to see your orders here'}
-                            </Text>
-                            <Button
-                                bg="#3b82f6"
-                                h={44}
-                                px={24}
-                                rounded={12}
-                                onPress={() => navigation.navigate('Shop')}
-                            >
-                                <Text color="white" fontSize={14} fontWeight="600">
-                                    {t('start_shopping') || 'Start Shopping'}
-                                </Text>
-                            </Button>
-                        </Div>
-                    )}
-                </>
-            ) : (
-                <Div>
-                    {[1, 2, 3].map((item) => (
-                        <Div key={item} mb={16} bg="white" rounded={16} p={20}>
-                            <Div flexDir="row" alignItems="center" mb={12}>
-                                <Skeleton.Circle h={50} w={50} />
-                                <Div ml={12} flex={1}>
-                                    <Skeleton.Box h={16} w="60%" mb={8} />
-                                    <Skeleton.Box h={12} w="40%" />
-                                </Div>
-                            </Div>
-                            <Skeleton.Box h={12} w="100%" mb={8} />
-                            <Skeleton.Box h={12} w="80%" />
-                        </Div>
-                    ))}
-                </Div>
-            )}
-        </Div>
-    );
-    // Addresses Tab Component
+    
 
 
-    // Profile Tab Component
-    const ProfileTab = () => (
-        <Div p={20}>
-            <Div flexDir="row" alignItems="center" mb={24}>
-                <Ionicons name="person-outline" size={24} color="#8b5cf6" />
-                <Text fontSize={20} fontWeight="700" color="#1f2937" ml={12}>
-                    {t('profile_info') || 'Profile Information'}
-                </Text>
-            </Div>
+  
 
-            <Div>
-                {/* Name Field */}
-                <Div mb={16} bg="white" rounded={16} p={16} borderWidth={1} borderColor="#f0f0f0">
-                    <Div flexDir="row" alignItems="center" mb={8}>
-                        <Ionicons name="person" size={20} color="#6b7280" />
-                        <Text fontSize={14} fontWeight="600" color="#374151" ml={8}>
-                            {t('full_name') || 'Full Name'}
-                        </Text>
-                    </Div>
-                    <Text fontSize={16} color="#1f2937" fontWeight="500">
-                        {auth?.user?.username || 'Not provided'}
-                    </Text>
-                </Div>
-
-                {/* Email Field */}
-                <Div mb={16} bg="white" rounded={16} p={16} borderWidth={1} borderColor="#f0f0f0">
-                    <Div flexDir="row" alignItems="center" mb={8}>
-                        <Ionicons name="mail" size={20} color="#6b7280" />
-                        <Text fontSize={14} fontWeight="600" color="#374151" ml={8}>
-                            {t('email_address') || 'Email Address'}
-                        </Text>
-                    </Div>
-                    <Text fontSize={16} color="#1f2937" fontWeight="500">
-                        {auth?.user?.email || 'Not provided'}
-                    </Text>
-                </Div>
-
-                {/* Phone Field */}
-                <Div mb={16} bg="white" rounded={16} p={16} borderWidth={1} borderColor="#f0f0f0">
-                    <Div flexDir="row" alignItems="center" mb={8}>
-                        <Ionicons name="call" size={20} color="#6b7280" />
-                        <Text fontSize={14} fontWeight="600" color="#374151" ml={8}>
-                            {t('phone_number') || 'Phone Number'}
-                        </Text>
-                    </Div>
-                    <Text fontSize={16} color="#1f2937" fontWeight="500">
-                        {auth?.user?.phone || 'Not provided'}
-                    </Text>
-                </Div>
-
-                {/* Edit Profile Button */}
-                <Button
-                    bg="#8b5cf6"
-                    h={48}
-                    rounded={12}
-                    mt={16}
-                    flexDir="row"
-                    alignItems="center"
-                    justifyContent="center"
-                    onPress={() => {/* Navigate to edit profile */}}
-                >
-                    <Ionicons name="create-outline" size={18} color="white" style={{ marginRight: 8 }} />
-                    <Text color="white" fontSize={16} fontWeight="600">
-                        {t('edit_profile') || 'Edit Profile'}
-                    </Text>
-                </Button>
-            </Div>
-        </Div>
-    );
-
-    // Settings Tab Component
-    const SettingsTab = () => (
-        <Div p={20}>
-            <Div flexDir="row" alignItems="center" mb={24}>
-                <Ionicons name="settings-outline" size={24} color="#f59e0b" />
-                <Text fontSize={20} fontWeight="700" color="#1f2937" ml={12}>
-                    {t('settings') || 'Settings'}
-                </Text>
-            </Div>
-
-            <Div>
-               
-                <Toggle_Lang />
-
-                {/* Notifications Setting */}
-                <Pressable onPress={() => {/* Notifications settings */}}>
-                    <Div flexDir="row" alignItems="center" justifyContent="space-between" bg="white" rounded={16} p={16} mb={12} borderWidth={1} borderColor="#f0f0f0">
-                        <Div flexDir="row" alignItems="center">
-                            <Ionicons name="notifications" size={20} color="#6b7280" />
-                            <Text fontSize={16} fontWeight="500" color="#1f2937" ml={12}>
-                                {t('notifications') || 'Notifications'}
-                            </Text>
-                        </Div>
-                        <Ionicons name="chevron-forward" size={16} color="#6b7280" />
-                    </Div>
-                </Pressable>
-
-                {/* Privacy Setting */}
-                <Pressable onPress={() => {/* Privacy settings */}}>
-                    <Div flexDir="row" alignItems="center" justifyContent="space-between" bg="white" rounded={16} p={16} mb={12} borderWidth={1} borderColor="#f0f0f0">
-                        <Div flexDir="row" alignItems="center">
-                            <Ionicons name="shield-checkmark" size={20} color="#6b7280" />
-                            <Text fontSize={16} fontWeight="500" color="#1f2937" ml={12}>
-                                {t('privacy') || 'Privacy'}
-                            </Text>
-                        </Div>
-                        <Ionicons name="chevron-forward" size={16} color="#6b7280" />
-                    </Div>
-                </Pressable>
-
-                {/* Help & Support */}
-                <Pressable onPress={() => {/* Help & Support */}}>
-                    <Div flexDir="row" alignItems="center" justifyContent="space-between" bg="white" rounded={16} p={16} mb={12} borderWidth={1} borderColor="#f0f0f0">
-                        <Div flexDir="row" alignItems="center">
-                            <Ionicons name="help-circle" size={20} color="#6b7280" />
-                            <Text fontSize={16} fontWeight="500" color="#1f2937" ml={12}>
-                                {t('help_support') || 'Help & Support'}
-                            </Text>
-                        </Div>
-                        <Ionicons name="chevron-forward" size={16} color="#6b7280" />
-                    </Div>
-                </Pressable>
-
-                {/* Logout Button */}
-                <Button
-                    bg="#ef4444"
-                    h={48}
-                    rounded={12}
-                    mt={24}
-                    flexDir="row"
-                    alignItems="center"
-                    justifyContent="center"
-                    onPress={() => {
-                        Alert.alert(
-                            t('logout') || 'Logout',
-                            t('logout_confirmation') || 'Are you sure you want to logout?',
-                            [
-                                { text: t('cancel') || 'Cancel', style: 'cancel' },
-                                { 
-                                    text: t('logout') || 'Logout', 
-                                    style: 'destructive',
-                                    onPress: () => {
-                                        handle_logout();
-                                        Toast.show({
-                                            type: 'success',
-                                            text1: t('logged_out') || 'Logged out successfully',
-                                            visibilityTime: 2000,
-                                        });
-                                    }
-                                }
-                            ]
-                        );
-                    }}
-                >
-                    <Ionicons name="log-out-outline" size={18} color="white" style={{ marginRight: 8 }} />
-                    <Text color="white" fontSize={16} fontWeight="600">
-                        {t('logout') || 'Logout'}
-                    </Text>
-                </Button>
-            </Div>
-        </Div>
-    );
+   
 
 
 
-
-    const fetch_user_orders = async () => {
-        try {
-            const response = await axios.get(`https://ecommerce-strapi-ex18.onrender.com/api/orders?filters[user_id][$eq]=${auth?.user.id}`, {
-                headers: {
-                    Authorization: `Bearer ${api_config.token}`,
-                },
-            });
-            const orders = response.data.data
-
-            if (orders.length > 0) {
-                setOrders(orders);
-                // Calculate user stats
-                const totalOrders = orders.length;
-                const completedOrders = orders.filter(order => order.status === 'completed' || order.status === 'delivered').length;
-                const totalSpent = orders.reduce((sum, order) => sum + parseFloat(order.total_amount || 0), 0);
-                
-                setUserStats({
-                    totalOrders,
-                    completedOrders,
-                    totalSpent: totalSpent.toFixed(2)
-                });
-            } else {
-                setOrders([])
-                setUserStats({
-                    totalOrders: 0,
-                    completedOrders: 0,
-                    totalSpent: '0.00'
-                });
-            }
-        } catch (error) {
-            console.log(error)
-            Toast.show({
-                type: 'error',
-                text1: t('error') || 'Error',
-                text2: t('failed_to_load_orders') || 'Failed to load orders',
-                visibilityTime: 3000,
-            });
-        }
-    }
 
     const onRefresh = async () => {
         setRefreshing(true);
-        await fetch_user_orders();
+        
         setRefreshing(false);
     };
 
 
-    useEffect(() => {
-        fetch_user_orders()
-    }, [])
+   
 
 
     return (
@@ -514,10 +153,10 @@ export default function Account() {
                 }
                 contentContainerStyle={{ flexGrow: 1 }}
             >
-                {activeTab === 0 && <OrdersTab />}
+                {activeTab === 0 && <Orders_Tab_User userStats={userStats} setUserStats={setUserStats} />}
                 {activeTab === 1 && <Address_Tab_User />}
-                {activeTab === 2 && <ProfileTab />}
-                {activeTab === 3 && <SettingsTab />}
+                {activeTab === 2 && <Profile_Tab_User />}
+                {activeTab === 3 && <Settings_Tab_User />}
             </ScrollView>
 
             <Bottom_Navbar />

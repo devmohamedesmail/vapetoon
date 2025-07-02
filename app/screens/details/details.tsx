@@ -7,27 +7,22 @@ import { useTranslation } from 'react-i18next';
 import Toast from 'react-native-toast-message';
 import axios from "axios";
 import Swiper from 'react-native-swiper';
-
 // Icons
 import { Ionicons, MaterialIcons, AntDesign, Feather } from '@expo/vector-icons';
-
-// Config & Redux
-import custom_colors from "../../config/custom_colors";
 import { api_config } from "../../config/api_config";
 import { add_to_cart } from '../../redux/reducers/cart_reducer';
 import { add_To_wishlist } from '../../redux/reducers/wishlist_reducer';
+import Fixed_Product_Action from "../../components/fixed_Product_action/fixed_product_action";
+import Product_Review from "../../components/product_review/product_review";
 
 const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
 
 export default function Details() {
   const route = useRoute();
-  const navigation = useNavigation();
+  const navigation = useNavigation<any>();
   const dispatch = useDispatch();
   const { t, i18n } = useTranslation();
-  
-  const { productId } = route.params;
-  
-  // State
+  const { productId }:any = route.params;
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [quantity, setQuantity] = useState(1);
@@ -43,7 +38,7 @@ export default function Details() {
     try {
       setLoading(true);
       const response = await axios.get(
-        `${process.env.EXPO_PUBLIC_APP_URL}/products?filters[id][$eq]=${productId}&populate[category]=true&populate[vendor]=true&populate[images]=true&populate[attributes][populate][values][populate]=image`,
+        `${api_config.url}/products?filters[id][$eq]=${productId}&populate[category]=true&populate[vendor]=true&populate[images]=true&populate[attributes][populate][values][populate]=image`,
         {
           headers: {
             Authorization: `Bearer ${api_config.token}`,
@@ -205,7 +200,6 @@ export default function Details() {
           alignItems="center" 
           justifyContent="space-between"
           bg="rgba(255,255,255,0.95)"
-          style={{ backdropFilter: 'blur(10px)' }}
         >
           <Pressable onPress={() => navigation.goBack()}>
             <Ionicons name="arrow-back" size={24} color="#1f2937" />
@@ -431,71 +425,16 @@ export default function Details() {
               </Div>
             </Div>
           </Div>
+
+          <Product_Review product={product} />
         </Animated.ScrollView>
 
-        {/* Fixed Bottom Action Bar */}
-        <Div
-          position="absolute"
-          bottom={0}
-          left={0}
-          right={0}
-          bg="white"
-          pt={20}
-          pb={32}
-          px={20}
-          borderTopWidth={1}
-          borderTopColor="#e5e7eb"
-        >
-          {/* Action Buttons Row */}
-          <Div flexDir="row" alignItems="center" justifyContent="space-between">
-            {/* Visit Store Button */}
-            <Button
-              bg="transparent"
-              borderWidth={2}
-              borderColor="#1f2937"
-              h={56}
-              flex={0.45}
-              rounded={16}
-              onPress={() => navigation.navigate('Vendor', { vendorId: product.vendor?.id })}
-              flexDir="row"
-              alignItems="center"
-              justifyContent="center"
-            >
-              <Ionicons 
-                name="storefront-outline" 
-                size={20} 
-                color="#1f2937" 
-                style={{ marginRight: 8 }}
-              />
-              <Text color="#1f2937" fontSize={15} fontWeight="600">
-                {t('visit_store')}
-              </Text>
-            </Button>
 
-            {/* Add to Cart Button */}
-            <Button
-              bg={product.stock > 0 ? "#1f2937" : "#9ca3af"}
-              h={56}
-              flex={0.5}
-              rounded={16}
-              disabled={product.stock === 0}
-              onPress={handleAddToCart}
-              flexDir="row"
-              alignItems="center"
-              justifyContent="center"
-            >
-              <MaterialIcons 
-                name="shopping-cart" 
-                size={20} 
-                color="white" 
-                style={{ marginRight: 8 }}
-              />
-              <Text color="white" fontSize={15} fontWeight="600">
-                {product.stock > 0 ? t('add_to_cart') : t('out_of_stock')}
-              </Text>
-            </Button>
-          </Div>
-        </Div>
+
+
+         <Fixed_Product_Action product={product} handleAddToCart={handleAddToCart} />
+        {/* Fixed Bottom Action Bar */}
+      
       </Animated.View>
     </Div>
   );

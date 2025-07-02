@@ -5,8 +5,8 @@ import { useTranslation } from 'react-i18next'
 import { Div, Text, Skeleton, Button, Icon, Input ,Modal} from 'react-native-magnus'
 import { api_config } from '../../../config/api_config';
 import { useFormik } from 'formik';
-import Custom_Button from '../../../custom_components/custom_button';
-import Custom_spinner from '../../../custom_components/custom_spinner';
+import Custom_Button from '../../../custom/custom_button';
+import Custom_spinner from '../../../custom/custom_spinner';
 
 
 

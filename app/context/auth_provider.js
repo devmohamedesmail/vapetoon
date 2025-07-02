@@ -30,14 +30,14 @@ const auth_provider = ({ children }) => {
 
     const handle_login = async (identifier, password) => {
         try {
-            const response = await axios.post(`${process.env.EXPO_PUBLIC_APP_URL}/auth/local`,
+            const response = await axios.post(`${api_config.url}/auth/local`,
                 {
                     identifier: identifier,
                     password: password
                 },
                 {
                     Headers: {
-                        Authorization: `Bearer ${process.env.EXPO_PUBLIC_TOKEN_SECRET}`,
+                        Authorization: `Bearer ${api_config.token}`,
                     }
                 })
             const user = response.data
@@ -55,7 +55,7 @@ const auth_provider = ({ children }) => {
     // handle register user
     const handle_register = async (username, email, password) => {
         try {
-            const response = await axios.post(`${process.env.EXPO_PUBLIC_APP_URL}/auth/local/register`,
+            const response = await axios.post(`${api_config.url}/auth/local/register`,
                 {
                     username: username,
                     email: email,
@@ -63,7 +63,7 @@ const auth_provider = ({ children }) => {
                 },
                 {
                     Headers: {
-                        Authorization: `Bearer ${process.env.EXPO_PUBLIC_TOKEN_SECRET}`,
+                        Authorization: `Bearer ${api_config.token}`,
                     }
                 })
             const user = response.data;

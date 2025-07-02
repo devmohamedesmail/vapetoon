@@ -54,7 +54,7 @@ export default function Address_Account_Item({ address }: { address: any }) {
                     )}
                 </Div>
 
-                <Div flexDir="row" alignItems="center">
+                {/* <Div flexDir="row" alignItems="center">
                     <Button
                         bg="transparent"
                         h={36}
@@ -81,7 +81,7 @@ export default function Address_Account_Item({ address }: { address: any }) {
                     >
                         <MaterialIcons name="delete" size={18} color="#ef4444" />
                     </Button>
-                </Div>
+                </Div> */}
             </Div>
         </Div>
     )

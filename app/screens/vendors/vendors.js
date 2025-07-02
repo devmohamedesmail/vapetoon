@@ -32,7 +32,7 @@ export default function Vendors() {
       })
 
       const vendors = response.data.data;
-      console.log("Vendors", vendors)
+    
       setVendors(vendors);
       setFilteredVendors(vendors);
       setLoading(false);

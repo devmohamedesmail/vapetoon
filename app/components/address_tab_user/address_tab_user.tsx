@@ -7,6 +7,7 @@ import { AuthContext } from '../../context/auth_provider'
 import Spinner_Loading from '../spinner_loading/spinner_loading'
 import axios from 'axios'
 import Address_Account_Item from '../../items/address_account_item'
+import { api_config } from '../../config/api_config'
 
 export default function Address_Tab_User() {
     const { t } = useTranslation();
@@ -17,9 +18,9 @@ export default function Address_Tab_User() {
 
     const fetchAddresses = async () => {
         try {
-            const response = await axios.get(`${process.env.EXPO_PUBLIC_APP_URL}/addresses?filters[user_id][$eq]=${auth?.user?.id}`,{
+            const response = await axios.get(`${api_config.url}/addresses?filters[user_id][$eq]=${auth?.user?.id}`,{
                 headers: {
-                    Authorization: `Bearer ${process.env.EXPO_PUBLIC_TOKEN_SECRET}`,
+                    Authorization: `Bearer ${api_config.token}`,
                 },
             })
             
@@ -40,7 +41,7 @@ useEffect(()=>{
 
 
     return (
-        <Div p={20}>
+        <Div p={20} pb={150}>
             <Div flexDir="row" alignItems="center" justifyContent="space-between" mb={20}>
                 <Div flexDir="row" alignItems="center">
                     <Ionicons name="location-outline" size={24} color="#059669" />
@@ -106,7 +107,7 @@ useEffect(()=>{
             ) : (
                 /* Addresses List */
                 <Div>
-                    {addresses.map((address) => (
+                    {addresses.map((address:any) => (
                        <Address_Account_Item key={address.id} address={address} />
                     ))}
                 </Div>

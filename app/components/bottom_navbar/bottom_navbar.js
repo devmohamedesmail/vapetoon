@@ -146,7 +146,7 @@ export default function Bottom_Navbar() {
           label={t('vendors')}
           isActive={isActive(['Vendors'])}
           onPress={() => navigation.navigate('Vendors')}
-          badge={wishlistItems.length}
+         
         />
 
         {/* Center Cart Button */}

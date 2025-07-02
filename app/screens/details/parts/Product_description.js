@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Div, Text, Radio, Button, Image } from "react-native-magnus";
 import custom_colors from "../../../config/custom_colors";
 import { api_config } from "../../../config/api_config";
-import Custom_quantity_btn from "../../../custom_components/custom_quantity_btn";
+import Custom_quantity_btn from "../../../custom/custom_quantity_btn";
 import { useTranslation } from "react-i18next";
 import { useNavigation } from '@react-navigation/native';
 import AntDesign from '@expo/vector-icons/AntDesign';
